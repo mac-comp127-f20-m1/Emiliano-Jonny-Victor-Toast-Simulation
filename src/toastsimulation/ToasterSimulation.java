@@ -36,10 +36,10 @@ public class ToasterSimulation {
         createBread();
         createToaster();
 
-        // Button toastButton = new Button("Toast Your Bread"); 
-        // canvas.add(toastButton);   
-        // toaster.addToCanvas(canvas);
-        // bagel.addToCanvas(canvas);
+        Button toastButton = new Button("Toast Your Bread"); 
+        canvas.add(toastButton);   
+        toaster.addToCanvas(canvas);
+        bagel.addToCanvas(canvas);
 
         canvas.onDrag(event ->
             setAnimationParameter(
@@ -80,6 +80,6 @@ public class ToasterSimulation {
 
     }
     public void createToaster(){
-        toaster = new Toaster(300, 300, width * 0.2 , height * 0.23); 
+        toaster = new Toaster(canvas); 
     }
 }
