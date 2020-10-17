@@ -26,23 +26,53 @@ public class ToasterSimulation {
     private GraphicsText cripsyness; 
     private GraphicsText timeLeft; 
     private GraphicsGroup group;
+    private double animationParameter;
+    // private Bagel bagel; 
+
+    private boolean flag = true; 
 
     public ToasterSimulation(){
         canvas = new CanvasWindow("TOAST!", CANVAS_WIDTH, CANVAS_HEIGHT);
         createBread();
         createToaster();
 
-        Button toastButton = new Button("Toast Your Bread"); 
-        canvas.add(toastButton);   
-        toaster.addToCanvas(canvas);
-        bagel.addToCanvas(canvas);
+        // Button toastButton = new Button("Toast Your Bread"); 
+        // canvas.add(toastButton);   
+        // toaster.addToCanvas(canvas);
+        // bagel.addToCanvas(canvas);
+
+        canvas.onDrag(event ->
+            setAnimationParameter(
+                getAnimationParameter() +
+                event.getDelta().getX() / width));
+
+        canvas.onMouseDown(event ->
+        flag = false);
+
+        canvas.onMouseUp(event ->
+        flag = true);
+
+        
         
 
+    }
+
+    public double getAnimationParameter() {
+        return animationParameter;
+    }
+
+    public void animateMethod() {
+        canvas.onMouseDown(event ->
+        flag = false);
+        
+    }
+    public void setAnimationParameter(double animationParameter) {
+        this.animationParameter = animationParameter;
     }
     
     public static void main(String[] args){
         ToasterSimulation simulation = new ToasterSimulation();
-        // simulation.run();
+
     }
 
     public void createBread(){

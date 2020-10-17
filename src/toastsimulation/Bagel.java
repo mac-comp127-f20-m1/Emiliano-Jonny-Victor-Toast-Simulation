@@ -33,7 +33,6 @@ public class Bagel {
     }
     public void addToCanvas(CanvasWindow canvas) {
         canvas.add(bagelBread);
-
     }
 
     /**
