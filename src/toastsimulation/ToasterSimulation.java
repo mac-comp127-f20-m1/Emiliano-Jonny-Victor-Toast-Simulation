@@ -16,8 +16,8 @@ public class ToasterSimulation {
     private Toaster toaster; 
 
     private CanvasWindow canvas; 
-    private static final int CANVAS_WIDTH = 600;
-    private static final int CANVAS_HEIGHT = 600;
+    private static final int CANVAS_WIDTH = 1200;
+    private static final int CANVAS_HEIGHT = 1200;
 
     private double x; 
     private double y;
