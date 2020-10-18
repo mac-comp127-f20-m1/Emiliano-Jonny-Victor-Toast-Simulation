@@ -1,7 +1,10 @@
 package toastsimulation;
 
+import java.util.ArrayList;
+
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsGroup;
+import edu.macalester.graphics.Image;
 import edu.macalester.graphics.Rectangle;
 import edu.macalester.graphics.ui.Button;
 
@@ -10,24 +13,18 @@ import edu.macalester.graphics.ui.Button;
  * 
  * By Emiliano, Victor and Jonny
  */
-public class Toaster extends Rectangle {
+public class Toaster{
     private CanvasWindow canvas; 
+    private Image toasterBody;
 
-    private double xPosition;
-    private double yPosition;
-    private double width;
-    private double height;
     
-    public Toaster(double xPosition, double yPosition, double width, double height){
-        super(xPosition, yPosition, width, height); 
-        this.xPosition = xPosition;
-        this.yPosition = yPosition;
-        this.width = width;
-        this.height = height; 
+    public Toaster(CanvasWindow canvas){
+        this.toasterBody = new Image(300, 450, "toasterBody.png");
+        this.canvas = canvas;
     }
 
     public void addToCanvas(CanvasWindow canvas) {
-        canvas.add(this);
+        canvas.add(toasterBody);
     }
 
 
