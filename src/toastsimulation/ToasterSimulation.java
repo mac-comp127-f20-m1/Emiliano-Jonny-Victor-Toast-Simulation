@@ -1,5 +1,7 @@
 package toastsimulation;
 
+import java.awt.Color;
+
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Ellipse;
 /**
@@ -28,9 +30,11 @@ public class ToasterSimulation {
     private GraphicsText timeLeft;
     private GraphicsGroup group;
     private double animationParameter;
-    // private Bagel bagel;
+    private Ellipse breadBoundary; 
+    private Bagel bagel2;
 
-    private boolean flag = true;
+    private boolean flag1 = true;
+    private boolean flag2 = true;
 
     public ToasterSimulation() {
         canvas = new CanvasWindow("TOAST!", CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -39,33 +43,68 @@ public class ToasterSimulation {
 
         toaster.addToCanvas(canvas);
         bagel.addToCanvas(canvas);
+        bagel2.addToCanvas(canvas);
+        toasterBoundary(); 
+        animateBagel1();
+        
+        // animateBagel2();
+    
+    }
 
+    // public Bagel checkBagel(Point point){
+    //     return elementAtbagelShape(event.getPosition()); 
+    // }
+
+
+    public void toasterBoundary(){
+        Ellipse breadBoundary = new Ellipse(415,290,350,350);
+        breadBoundary.setFillColor(Color.BLACK); 
+       canvas.add(breadBoundary); 
+    }
+    public void animateBagel1(){
 
         Ellipse bagelShape = bagel.getShape();
         canvas.onDrag(
             event -> 
-        bagelShape.setPosition(
-            bagelShape.getX() + event.getDelta().getX(),
-            bagelShape.getY() + event.getDelta().getY()));
-       
-        canvas.onMouseDown(event ->
-        flag = false);
-
-        canvas.onMouseUp(event ->
-        flag = true);
-
-
+                bagelShape.setPosition(
+                bagelShape.getX() + event.getDelta().getX(),
+                bagelShape.getY() + event.getDelta().getY()));
+    //    animateMethod();
     }
+
+    // public void animateBagel2(){
+    //     Ellipse bagelShape2 = bagel2.getShape();
+    //     canvas.onDrag(
+    //         event -> 
+    //             bagelShape2.setPosition(
+    //             bagelShape2.getX() + event.getDelta().getX(),
+    //             bagelShape2.getY() + event.getDelta().getY()));
+    //     // animateMethod2();
+    // }
 
     public double getAnimationParameter() {
         return animationParameter;
     }
 
-    public void animateMethod() {
-        canvas.onMouseDown(event ->
-        flag = false);
-        
-    }
+    // public void animateMethod() {
+    //     if(flag1 == false){
+    //     canvas.onMouseDown(event ->
+    //     flag1 = false);
+    //     }else{
+    //     canvas.onMouseUp(event ->
+    //         flag1 = true);
+    //     }
+    // }
+
+
+    
+
+
+
+
+
+
+
     public void setAnimationParameter(double animationParameter) {
         this.animationParameter = animationParameter;
     }
@@ -77,6 +116,7 @@ public class ToasterSimulation {
 
     public void createBread(){
         bagel = new Bagel(303, 303, CANVAS_WIDTH, CANVAS_HEIGHT); 
+        // bagel2 = new Bagel(303, 600, CANVAS_WIDTH, CANVAS_HEIGHT); 
     }
     public void createToaster(){
         toaster = new Toaster(canvas); 

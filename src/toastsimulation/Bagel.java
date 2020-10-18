@@ -14,8 +14,8 @@ public class Bagel {
     private double maxY;
 
     private Ellipse bagelBread;
-    private final double BALL_RADIUS = 100; 
-    public static final Color breadColor = new Color(255,255,140);
+    private final double BALL_RADIUS = 150; 
+    public static final Color breadColor = new Color(255,255,153);
 
     public Bagel(
         double centerX,
