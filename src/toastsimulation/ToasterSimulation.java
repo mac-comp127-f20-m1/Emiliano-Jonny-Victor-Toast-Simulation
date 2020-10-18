@@ -46,6 +46,13 @@ public class ToasterSimulation {
         bagel2.addToCanvas(canvas);
         toasterBoundary(); 
         animateBagel1();
+
+        Ellipse bagel = bagel.getShape();
+        canvas.onDrag(
+            event -> 
+                bagel.setPosition(
+                bagel.getX() + event.getDelta().getX(),
+                bagel.getY() + event.getDelta().getY()));
         
         // animateBagel2();
     
@@ -73,12 +80,12 @@ public class ToasterSimulation {
     }
 
     // public void animateBagel2(){
-    //     Ellipse bagelShape2 = bagel2.getShape();
-    //     canvas.onDrag(
-    //         event -> 
-    //             bagelShape2.setPosition(
-    //             bagelShape2.getX() + event.getDelta().getX(),
-    //             bagelShape2.getY() + event.getDelta().getY()));
+        // Ellipse bagelShape2 = bagel2.getShape();
+        // canvas.onDrag(
+        //     event -> 
+        //         bagelShape2.setPosition(
+        //         bagelShape2.getX() + event.getDelta().getX(),
+        //         bagelShape2.getY() + event.getDelta().getY()));
     //     // animateMethod2();
     // }
 
