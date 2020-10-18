@@ -43,17 +43,14 @@ public class ToasterSimulation {
 
         toaster.addToCanvas(canvas);
         bagel.addToCanvas(canvas);
-        bagel2.addToCanvas(canvas);
+        // bagel2.addToCanvas(canvas);
         toasterBoundary(); 
         animateBagel1();
         
         // animateBagel2();
     
-    }
 
-    // public Bagel checkBagel(Point point){
-    //     return elementAtbagelShape(event.getPosition()); 
-    // }
+    }
 
 
     public void toasterBoundary(){
@@ -69,34 +66,41 @@ public class ToasterSimulation {
                 bagelShape.setPosition(
                 bagelShape.getX() + event.getDelta().getX(),
                 bagelShape.getY() + event.getDelta().getY()));
-    //    animateMethod();
+       animateMethod();
     }
 
-    // public void animateBagel2(){
-    //     Ellipse bagelShape2 = bagel2.getShape();
-    //     canvas.onDrag(
-    //         event -> 
-    //             bagelShape2.setPosition(
-    //             bagelShape2.getX() + event.getDelta().getX(),
-    //             bagelShape2.getY() + event.getDelta().getY()));
-    //     // animateMethod2();
-    // }
+    public void animateBagel2(){
+        Ellipse bagelShape2 = bagel2.getShape();
+        canvas.onDrag(
+            event -> 
+                bagelShape2.setPosition(
+                bagelShape2.getX() + event.getDelta().getX(),
+                bagelShape2.getY() + event.getDelta().getY()));
+        animateMethod();
+    }
 
     public double getAnimationParameter() {
         return animationParameter;
     }
 
-    // public void animateMethod() {
-    //     if(flag1 == false){
-    //     canvas.onMouseDown(event ->
-    //     flag1 = false);
-    //     }else{
-    //     canvas.onMouseUp(event ->
-    //         flag1 = true);
-    //     }
-    // }
-
-
+    public void animateMethod() {
+        if(flag1 == false){
+        canvas.onMouseDown(event ->
+        flag1 = false);
+        }else{
+        canvas.onMouseUp(event ->
+            flag1 = true);
+        }
+    }
+    public void animateMethod2() {
+        if(flag2 == false){
+        canvas.onMouseDown(event ->
+        flag2 = false);
+        }else{
+        canvas.onMouseUp(event ->
+            flag2 = true);
+        }
+    }
     
 
 
