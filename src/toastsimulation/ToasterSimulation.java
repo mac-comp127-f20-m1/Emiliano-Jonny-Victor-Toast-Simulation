@@ -46,7 +46,7 @@ public class ToasterSimulation {
             event -> 
         bagelShape.setPosition(
             bagelShape.getX() + event.getDelta().getX(),
-            bagelShape.getX() + event.getDelta().getY()));
+            bagelShape.getY() + event.getDelta().getY()));
        
         canvas.onMouseDown(event ->
         flag = false);
@@ -79,6 +79,6 @@ public class ToasterSimulation {
         bagel = new Bagel(303, 303, CANVAS_WIDTH, CANVAS_HEIGHT); 
     }
     public void createToaster(){
-        toaster = new Toaster(300, 300, width * 0.2 , height * 0.23); 
+        toaster = new Toaster(canvas); 
     }
 }
