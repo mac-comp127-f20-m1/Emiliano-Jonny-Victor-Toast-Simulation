@@ -35,6 +35,7 @@ public class ToasterSimulation {
 
     private boolean flag1 = true;
     private boolean flag2 = true;
+    private Ellipse bagelShape; 
 
     public ToasterSimulation() {
         canvas = new CanvasWindow("TOAST!", CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -44,23 +45,29 @@ public class ToasterSimulation {
         toaster.addToCanvas(canvas);
         bagel.addToCanvas(canvas);
         // bagel2.addToCanvas(canvas);
-        toasterBoundary(); 
-        animateBagel1();
-        
-        // animateBagel2();
-    
+        this.bagelShape = bagel.getShape(); 
+        toasterBoundary();
+        canvas.animate(() ->
+        {
+            checkBounds();
+        });
+        animateBagel1(); 
 
     }
+    public void checkBounds() {
+        if (bagel.getX() > 415 && bagel.getX() < 765 && bagel.getY() > 290 && bagel.getY() < 640) {
+            canvas.remove(bagel.getShape());
+        }
+    }
+
 
 
     public void toasterBoundary(){
         Ellipse breadBoundary = new Ellipse(415,290,350,350);
-        breadBoundary.setFillColor(Color.BLACK); 
-       canvas.add(breadBoundary); 
+        // breadBoundary.setFillColor(Color.WHITE); 
+        canvas.add(breadBoundary); 
     }
     public void animateBagel1(){
-
-        Ellipse bagelShape = bagel.getShape();
         canvas.onDrag(
             event -> 
                 bagelShape.setPosition(

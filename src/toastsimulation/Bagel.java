@@ -47,6 +47,9 @@ public class Bagel {
     public double getX() {
         return centerX;
     }
+    public double getY() {
+        return centerY;
+    }
 
     public Point getPosition(){
         return bagelBread.getPosition(); 
