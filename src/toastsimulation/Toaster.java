@@ -19,7 +19,8 @@ public class Toaster{
 
     
     public Toaster(CanvasWindow canvas){
-        this.toasterBody = new Image(0, 0, "toasterBody.png");
+        this.toasterBody = new Image(300, 450, "toasterBody.png");
+        this.canvas = canvas;
     }
 
     public void addToCanvas(CanvasWindow canvas) {
