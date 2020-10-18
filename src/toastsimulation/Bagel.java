@@ -12,7 +12,7 @@ public class Bagel {
     private double maxY;
 
     private Ellipse bagelBread;
-    private final double BALL_RADIUS = 50.5; 
+    private final double BALL_RADIUS = 100; 
     public static final Color breadColor = new Color(255,255,140);
 
     public Bagel(
@@ -42,5 +42,10 @@ public class Bagel {
     public void removeFromCanvas(CanvasWindow canvas) {
         canvas.remove(bagelBread);
     }
-    
+    public double getX() {
+        return centerX;
+    }
+    public Ellipse getShape(){
+        return bagelBread; 
+    }
 }

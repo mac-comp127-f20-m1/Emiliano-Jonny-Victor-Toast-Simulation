@@ -1,6 +1,7 @@
 package toastsimulation;
 
 import edu.macalester.graphics.CanvasWindow;
+import edu.macalester.graphics.Ellipse;
 /**
  * This class is the main toaster simulation.
  * 
@@ -12,48 +13,47 @@ import edu.macalester.graphics.ui.Button;
 
 
 public class ToasterSimulation {
-    private Bagel bagel; 
-    private Toaster toaster; 
+    private Bagel bagel;
+    private Toaster toaster;
 
-    private CanvasWindow canvas; 
+    private CanvasWindow canvas;
     private static final int CANVAS_WIDTH = 1200;
     private static final int CANVAS_HEIGHT = 1200;
 
-    private double x; 
+    private double x;
     private double y;
     private double width = CANVAS_WIDTH;
-    private double height = CANVAS_HEIGHT; 
-    private GraphicsText cripsyness; 
-    private GraphicsText timeLeft; 
+    private double height = CANVAS_HEIGHT;
+    private GraphicsText cripsyness;
+    private GraphicsText timeLeft;
     private GraphicsGroup group;
     private double animationParameter;
-    // private Bagel bagel; 
+    // private Bagel bagel;
 
-    private boolean flag = true; 
+    private boolean flag = true;
 
-    public ToasterSimulation(){
+    public ToasterSimulation() {
         canvas = new CanvasWindow("TOAST!", CANVAS_WIDTH, CANVAS_HEIGHT);
         createBread();
         createToaster();
 
-        // Button toastButton = new Button("Toast Your Bread"); 
-        // canvas.add(toastButton);   
-        // toaster.addToCanvas(canvas);
-        // bagel.addToCanvas(canvas);
+        toaster.addToCanvas(canvas);
+        bagel.addToCanvas(canvas);
 
-        canvas.onDrag(event ->
-            setAnimationParameter(
-                getAnimationParameter() +
-                event.getDelta().getX() / width));
 
+        Ellipse bagelShape = bagel.getShape();
+        canvas.onDrag(
+            event -> 
+        bagelShape.setPosition(
+            bagelShape.getX() + event.getDelta().getX(),
+            bagelShape.getX() + event.getDelta().getY()));
+       
         canvas.onMouseDown(event ->
         flag = false);
 
         canvas.onMouseUp(event ->
         flag = true);
 
-        
-        
 
     }
 
@@ -76,8 +76,7 @@ public class ToasterSimulation {
     }
 
     public void createBread(){
-        bagel = new Bagel(50, 50, CANVAS_WIDTH, CANVAS_HEIGHT); 
-
+        bagel = new Bagel(303, 303, CANVAS_WIDTH, CANVAS_HEIGHT); 
     }
     public void createToaster(){
         toaster = new Toaster(300, 300, width * 0.2 , height * 0.23); 
