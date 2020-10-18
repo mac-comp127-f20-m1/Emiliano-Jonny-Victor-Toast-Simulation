@@ -51,8 +51,8 @@ public class Bagel {
         return centerY;
     }
 
-    public Point getPosition(){
-        return bagelBread.getPosition(); 
+    public Point getCenter(){
+        return bagelBread.getCenter(); 
     }
     public Ellipse getShape(){
         return bagelBread; 
