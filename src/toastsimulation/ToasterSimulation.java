@@ -31,6 +31,7 @@ public class ToasterSimulation {
     private GraphicsGroup group;
     private double animationParameter;
     private Ellipse breadBoundary; 
+    private final double BREAD_RADIUS = 225;  
     private Bagel bagel2;
 
     private boolean flag1 = true;
@@ -55,7 +56,7 @@ public class ToasterSimulation {
 
     }
     public void checkBounds() {
-        if (bagel.getX() > 415 && bagel.getX() < 765 && bagel.getY() > 290 && bagel.getY() < 640) {
+        if (bagel.getX() > breadBoundary. && bagel.getX() < 765 && bagel.getY() > 290 && bagel.getY() < 640) {
             canvas.remove(bagel.getShape());
         }
     }
@@ -63,7 +64,7 @@ public class ToasterSimulation {
 
 
     public void toasterBoundary(){
-        Ellipse breadBoundary = new Ellipse(415,290,350,350);
+        Ellipse breadBoundary = new Ellipse(415,290,BREAD_RADIUS,BREAD_RADIUS);
         // breadBoundary.setFillColor(Color.WHITE); 
         canvas.add(breadBoundary); 
     }
