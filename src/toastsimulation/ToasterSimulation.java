@@ -31,15 +31,19 @@ public class ToasterSimulation {
     private GraphicsGroup group;
     private double animationParameter;
     private Ellipse breadBoundary; 
-    private final double BREAD_RADIUS = 225;  
+    private final double BREAD_RADIUS = 350;  
     private Bagel bagel2;
+    private double centerX; 
+    private double centerY; 
 
     private boolean flag1 = true;
     private boolean flag2 = true;
     private Ellipse bagelShape; 
 
     public ToasterSimulation() {
+        this.breadBoundary = new Ellipse(415,290,BREAD_RADIUS,BREAD_RADIUS); 
         canvas = new CanvasWindow("TOAST!", CANVAS_WIDTH, CANVAS_HEIGHT);
+        canvas.add(breadBoundary); 
         createBread();
         createToaster();
 
@@ -47,27 +51,26 @@ public class ToasterSimulation {
         bagel.addToCanvas(canvas);
         // bagel2.addToCanvas(canvas);
         this.bagelShape = bagel.getShape(); 
-        toasterBoundary();
-        canvas.animate(() ->
-        {
-            checkBounds();
-        });
+        // toasterBoundary();
+        // canvas.animate(() ->
+        // {
+        //     checkBounds();
+        // });
+        removeBreadFromCanvas();
         animateBagel1(); 
 
     }
     public void checkBounds() {
-        if (bagel.getX() > breadBoundary. && bagel.getX() < 765 && bagel.getY() > 290 && bagel.getY() < 640) {
-            canvas.remove(bagel.getShape());
+        System.out.println(bagelShape.getX()); 
+        if (bagel.getRadius()+ BREAD_RADIUS >= Math.hypot(Math.abs(bagel.getX() - centerX), Math.abs(bagel.getY() - centerY))) {
+            System.out.println("true");
         }
     }
-
-
-
-    public void toasterBoundary(){
-        Ellipse breadBoundary = new Ellipse(415,290,BREAD_RADIUS,BREAD_RADIUS);
-        // breadBoundary.setFillColor(Color.WHITE); 
-        canvas.add(breadBoundary); 
+    public void removeBreadFromCanvas(){
+        checkBounds();
+        // canvas.remove(bagel.getShape());
     }
+
     public void animateBagel1(){
         canvas.onDrag(
             event -> 

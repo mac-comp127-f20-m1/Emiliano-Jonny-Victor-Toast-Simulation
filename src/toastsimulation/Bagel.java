@@ -50,6 +50,9 @@ public class Bagel {
     public double getY() {
         return centerY;
     }
+    public double getRadius(){
+        return BALL_RADIUS; 
+    }
 
     public Point getCenter(){
         return bagelBread.getCenter(); 
