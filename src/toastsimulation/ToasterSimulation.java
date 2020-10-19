@@ -11,6 +11,7 @@ import edu.macalester.graphics.Ellipse;
  */
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsText;
+import edu.macalester.graphics.Point;
 import edu.macalester.graphics.Rectangle;
 import edu.macalester.graphics.ui.Button;
 
@@ -38,6 +39,7 @@ public class ToasterSimulation {
     private Rectangle slitBoundary1;
     private Rectangle slitBoundary2;
     private boolean isAnimating;
+    private boolean isDragable;
     
     private Rectangle lever; 
 
@@ -74,6 +76,7 @@ public class ToasterSimulation {
         // bagel2.addToCanvas(canvas);
         this.bagelShape = bagel.getShape(); 
         animateBagel1(); 
+        animateLever();
         canvas.animate(() ->
         {
             if(isAnimating == true){
@@ -100,11 +103,15 @@ public class ToasterSimulation {
 
     public void animateBagel1(){
         canvas.onDrag(
-            event -> 
-                bagelShape.setPosition(
-                bagelShape.getX() + event.getDelta().getX(),
-                bagelShape.getY() + event.getDelta().getY()));
-       animateMethod();
+            event ->{
+                if(isBreadObject(event.getPosition())){
+                    bagelShape.setPosition(
+                    bagelShape.getX() + event.getDelta().getX(),
+                    bagelShape.getY() + event.getDelta().getY());
+                    animateMethod();
+                }
+            }
+        );
     }
 
     public void animateBagel2(){
@@ -141,7 +148,21 @@ public class ToasterSimulation {
     }
 
     public void animateLever(){
-        
+        canvas.onDrag(
+            event -> 
+                lever.setPosition(
+                lever.getX(),
+                lever.getY() + event.getDelta().getY()));
+        animateMethod();
+    }
+
+    public boolean isBreadObject(Point point){
+        if(canvas.getElementAt(point) instanceof Ellipse){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
     
 
