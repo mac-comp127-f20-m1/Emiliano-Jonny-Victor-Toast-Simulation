@@ -105,6 +105,7 @@ public class ToasterSimulation {
         canvas.onDrag(
             event ->{
                 if(isBreadObject(event.getPosition())){
+                    //if (bagelShape.gety)
                     bagelShape.setPosition(
                     bagelShape.getX() + event.getDelta().getX(),
                     bagelShape.getY() + event.getDelta().getY());
