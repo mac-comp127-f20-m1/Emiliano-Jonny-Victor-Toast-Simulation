@@ -149,10 +149,15 @@ public class ToasterSimulation {
 
     public void animateLever(){
         canvas.onDrag(
-            event -> 
-                lever.setPosition(
-                lever.getX(),
-                lever.getY() + event.getDelta().getY()));
+            event ->{
+                if(isLeverObject(event.getPosition())){
+                    lever.setPosition(
+                    lever.getX(),
+                    lever.getY() + event.getDelta().getY());
+                    animateMethod();
+                }
+            }
+        );
         animateMethod();
     }
 
@@ -165,6 +170,14 @@ public class ToasterSimulation {
         }
     }
     
+    public boolean isLeverObject(Point point){
+        if(canvas.getElementAt(point) instanceof Rectangle){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 
 
 
