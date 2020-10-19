@@ -37,6 +37,7 @@ public class ToasterSimulation {
     private double centerY; 
     private Rectangle slitBoundary1;
     private Rectangle slitBoundary2;
+    private boolean isAnimating;
     
     private Rectangle lever; 
 
@@ -51,13 +52,16 @@ public class ToasterSimulation {
         slitBoundary2 = new Rectangle(392, 541, 400, 22);
         slitBoundary2.setStrokeColor(Color.DARK_GRAY);
 
-        lever = new Rectangle(305,520,60,30);
+        lever = new Rectangle(255,700,60,30);
         lever.setFillColor(Color.DARK_GRAY);
+
 
         canvas = new CanvasWindow("TOAST!", CANVAS_WIDTH, CANVAS_HEIGHT);
         
         createBread();
         createToaster();
+
+        isAnimating = true;
         
         
 
@@ -72,15 +76,25 @@ public class ToasterSimulation {
         animateBagel1(); 
         canvas.animate(() ->
         {
-            checkBounds();
+            if(isAnimating == true){
+                checkBounds();
+            }
+            else{
+                ;
+            }
+            
         });
         // removeBreadFromCanvas();
         
     }
     public void checkBounds() {
         if (bagel.getShape().getX()>392 && bagel.getShape().getX()+bagel.getRadius()<792 && canvas.getElementAt(bagel.getShape().getX()+bagel.getRadius(), bagel.getShape().getY()+(2*bagel.getRadius())) instanceof Rectangle) {
+            
             canvas.remove(bagel.getShape());
+            isAnimating = false;
+            
         }
+        
     }
 
 
@@ -124,6 +138,10 @@ public class ToasterSimulation {
         canvas.onMouseUp(event ->
             flag2 = true);
         }
+    }
+
+    public void animateLever(){
+        
     }
     
 
