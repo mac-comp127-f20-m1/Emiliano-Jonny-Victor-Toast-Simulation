@@ -35,6 +35,7 @@ public class ToasterSimulation {
     private Rectangle slitBoundary2;
     private boolean isAnimating;
     private boolean isDragable;
+    private double dy = .1; 
     
     private Rectangle lever; 
 
@@ -59,8 +60,8 @@ public class ToasterSimulation {
         createToaster();
 
         isAnimating = true;
-
         toaster.addToCanvas(canvas);
+        canvas.add(slitBoundary1);
         bagel.addToCanvas(canvas);
         overLappingBagel(); 
         
@@ -68,7 +69,7 @@ public class ToasterSimulation {
        
         // canvas.add(slitBoundary2); 
         canvas.add(lever); 
-        canvas.add(slitBoundary1);
+        
 
         // bagel2.addToCanvas(canvas);
         this.bagelShape = bagel.getShape(); 
@@ -80,7 +81,9 @@ public class ToasterSimulation {
             if(isAnimating == true){
                 checkBounds();
             }else{
-                ;
+               bagel.getShape().moveBy(0,30 * dy);
+            //    canvas.pause(200);
+            //    bagel.removeFromCanvas(canvas);
             }
             
         });
@@ -103,7 +106,7 @@ public class ToasterSimulation {
             instanceof Rectangle) {
             // canvas.remove(bagel.getShape());
             isAnimating = false;
-           
+            canvas.pause(300);
         }
         
     }
