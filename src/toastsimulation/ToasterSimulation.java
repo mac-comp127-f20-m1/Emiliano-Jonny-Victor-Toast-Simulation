@@ -59,22 +59,27 @@ public class ToasterSimulation {
         createToaster();
 
         isAnimating = true;
+
         toaster.addToCanvas(canvas);
+        bagel.addToCanvas(canvas);
+        overLappingBagel(); 
         
-        // canvas.add(slitBoundary1);
+        
+       
         // canvas.add(slitBoundary2); 
         canvas.add(lever); 
-        bagel.addToCanvas(canvas);
+        canvas.add(slitBoundary1);
+
         // bagel2.addToCanvas(canvas);
         this.bagelShape = bagel.getShape(); 
+
         animateBagel1(); 
         animateLever();
         canvas.animate(() ->
         {
             if(isAnimating == true){
                 checkBounds();
-            }
-            else{
+            }else{
                 ;
             }
             
@@ -82,10 +87,23 @@ public class ToasterSimulation {
         // removeBreadFromCanvas();
         
     }
+
+    public void overLappingBagel(){
+        toaster.removeMiddleBody();
+        toaster.addMiddleBody();
+        toaster.removeBottomBody();
+        toaster.addBottomBody();
+    }
+
     public void checkBounds() {
-        if (bagel.getShape().getX()>392 && bagel.getShape().getX()+bagel.getRadius()<792 && canvas.getElementAt(bagel.getShape().getX()+bagel.getRadius(), bagel.getShape().getY()+(2*bagel.getRadius())) instanceof Rectangle) {
-            canvas.remove(bagel.getShape());
+        if (bagel.getShape().getX()>392 && 
+            bagel.getShape().getX()+bagel.getRadius()<792 &&
+            canvas.getElementAt(bagel.getShape().getX()+bagel.getRadius(), 
+            bagel.getShape().getY()+(2*bagel.getRadius())) 
+            instanceof Rectangle) {
+            // canvas.remove(bagel.getShape());
             isAnimating = false;
+           
         }
         
     }
