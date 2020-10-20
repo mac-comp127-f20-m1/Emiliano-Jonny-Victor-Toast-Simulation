@@ -80,10 +80,11 @@ public class ToasterSimulation {
         {
             if(isAnimating == true){
                 checkBounds();
-            }else{
+            }else if(!bagel.getShape().equals(null)){
                bagel.getShape().moveBy(0,30 * dy);
-            //    canvas.pause(200);
-            //    bagel.removeFromCanvas(canvas);
+               if(bagel.getShape().getY() > 800){
+                   bagel.removeFromCanvas(canvas);
+                }
             }
             
         });
@@ -104,7 +105,7 @@ public class ToasterSimulation {
             canvas.getElementAt(bagel.getShape().getX()+bagel.getRadius(), 
             bagel.getShape().getY()+(2*bagel.getRadius())) 
             instanceof Rectangle) {
-            // canvas.remove(bagel.getShape());
+
             isAnimating = false;
             canvas.pause(300);
         }
@@ -132,9 +133,11 @@ public class ToasterSimulation {
                 bagelShape2.getY() + event.getDelta().getY()));
         animateMethod();
     }
+
     public double getAnimationParameter() {
         return animationParameter;
     }
+
     public void animateMethod() {
         if(flag1 == false){
         canvas.onMouseDown(event ->
@@ -144,6 +147,7 @@ public class ToasterSimulation {
             flag1 = true);
         }
     }
+
     public void animateMethod2() {
         if(flag2 == false){
         canvas.onMouseDown(event ->
