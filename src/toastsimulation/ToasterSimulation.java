@@ -1,7 +1,5 @@
 package toastsimulation;
-
 import java.awt.Color;
-
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Ellipse;
 /**
@@ -14,16 +12,12 @@ import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.Point;
 import edu.macalester.graphics.Rectangle;
 import edu.macalester.graphics.ui.Button;
-
-
 public class ToasterSimulation {
     private Bagel bagel;
     private Toaster toaster;
-
     private CanvasWindow canvas;
     private static final int CANVAS_WIDTH = 1200;
     private static final int CANVAS_HEIGHT = 1200;
-
     private double x;
     private double y;
     private double width = CANVAS_WIDTH;
@@ -32,6 +26,7 @@ public class ToasterSimulation {
     private GraphicsText timeLeft;
     private GraphicsGroup group;
     private double animationParameter;
+
     private final double BREAD_RADIUS = 350;  
     private Bagel bagel2;
     private double centerX; 
@@ -43,10 +38,10 @@ public class ToasterSimulation {
     
     private Rectangle lever; 
 
+
     private boolean flag1 = true;
     private boolean flag2 = true;
-    private Ellipse bagelShape; 
-
+    private Ellipse bagelShape;
     public ToasterSimulation() {
         slitBoundary1 = new Rectangle(392, 487, 400, 22);
         slitBoundary1.setStrokeColor(Color.DARK_GRAY);
@@ -64,9 +59,6 @@ public class ToasterSimulation {
         createToaster();
 
         isAnimating = true;
-        
-        
-
         toaster.addToCanvas(canvas);
         
         // canvas.add(slitBoundary1);
@@ -92,14 +84,11 @@ public class ToasterSimulation {
     }
     public void checkBounds() {
         if (bagel.getShape().getX()>392 && bagel.getShape().getX()+bagel.getRadius()<792 && canvas.getElementAt(bagel.getShape().getX()+bagel.getRadius(), bagel.getShape().getY()+(2*bagel.getRadius())) instanceof Rectangle) {
-            
             canvas.remove(bagel.getShape());
             isAnimating = false;
-            
         }
         
     }
-
 
     public void animateBagel1(){
         canvas.onDrag(
@@ -113,21 +102,18 @@ public class ToasterSimulation {
             }
         );
     }
-
     public void animateBagel2(){
         Ellipse bagelShape2 = bagel2.getShape();
         canvas.onDrag(
-            event -> 
+            event ->
                 bagelShape2.setPosition(
                 bagelShape2.getX() + event.getDelta().getX(),
                 bagelShape2.getY() + event.getDelta().getY()));
         animateMethod();
     }
-
     public double getAnimationParameter() {
         return animationParameter;
     }
-
     public void animateMethod() {
         if(flag1 == false){
         canvas.onMouseDown(event ->
@@ -185,26 +171,17 @@ public class ToasterSimulation {
         }
     }
 
-
-
-
-
-
-
     public void setAnimationParameter(double animationParameter) {
         this.animationParameter = animationParameter;
     }
-    
     public static void main(String[] args){
         ToasterSimulation simulation = new ToasterSimulation();
-
     }
-
     public void createBread(){
-        bagel = new Bagel(303, 303, CANVAS_WIDTH, CANVAS_HEIGHT); 
-        // bagel2 = new Bagel(303, 600, CANVAS_WIDTH, CANVAS_HEIGHT); 
+        bagel = new Bagel(303, 303, CANVAS_WIDTH, CANVAS_HEIGHT);
+        // bagel2 = new Bagel(303, 600, CANVAS_WIDTH, CANVAS_HEIGHT);
     }
     public void createToaster(){
-        toaster = new Toaster(canvas); 
+        toaster = new Toaster(canvas);
     }
 }
