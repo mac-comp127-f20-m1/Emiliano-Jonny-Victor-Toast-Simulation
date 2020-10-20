@@ -4,7 +4,7 @@ import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Ellipse;
 /**
  * This class is the main toaster simulation.
- * 
+ *
  * By Emiliano, Victor and Jonny
  */
 import edu.macalester.graphics.GraphicsGroup;
