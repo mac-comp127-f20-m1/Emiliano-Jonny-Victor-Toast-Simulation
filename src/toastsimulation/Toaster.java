@@ -21,9 +21,15 @@ public class Toaster{
 
     
     public Toaster(CanvasWindow canvas){
+<<<<<<< HEAD
         this.toasterTopBody = new Image(300, 300, "toasterTopBody.png");
         this.toasterMidBody = new Image(300, 496, "toasterMidBody.png");
         this.toasterBottemBody = new Image(300, 546, "toasterBottemBody.png");
+=======
+        this.toasterTopBody = new Image(300, 450, "res/Images/toasterTopBody.png");
+        // this.toasterMidBody = new Image(300, 496, "toasterMidBody.png");
+        // this.toasterBottemBody = new Image(300, 546, "toasterBottemBody.png");
+>>>>>>> b5fa208d50cd90b558b923eb4d39d4ba33556573
 
         this.canvas = canvas;
     }

@@ -141,7 +141,6 @@ public class ToasterSimulation {
                         lever.getX(),
                         lever.getY() + event.getDelta().getY());
                     animateMethod();
-                    System.out.println("poop fart");
                     if (lever.getY() <= 699){
                         lever.setY(699);
                     } else if (lever.getY() >= 850) {
