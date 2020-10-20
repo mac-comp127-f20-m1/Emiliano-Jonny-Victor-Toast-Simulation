@@ -69,8 +69,8 @@ public class ToasterSimulation {
 
         toaster.addToCanvas(canvas);
         
-        canvas.add(slitBoundary1);
-        canvas.add(slitBoundary2); 
+        // canvas.add(slitBoundary1);
+        // canvas.add(slitBoundary2); 
         canvas.add(lever); 
         bagel.addToCanvas(canvas);
         // bagel2.addToCanvas(canvas);
@@ -105,7 +105,6 @@ public class ToasterSimulation {
         canvas.onDrag(
             event ->{
                 if(isBreadObject(event.getPosition())){
-                    //if (bagelShape.gety)
                     bagelShape.setPosition(
                     bagelShape.getX() + event.getDelta().getX(),
                     bagelShape.getY() + event.getDelta().getY());

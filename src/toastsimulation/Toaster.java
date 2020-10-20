@@ -15,16 +15,22 @@ import edu.macalester.graphics.ui.Button;
  */
 public class Toaster{
     private CanvasWindow canvas; 
-    private Image toasterBody;
+    private Image toasterTopBody;
+    private Image toasterMidBody;
+    private Image toasterBottemBody;
 
     
     public Toaster(CanvasWindow canvas){
-        this.toasterBody = new Image(300, 450, "toasterBody.png");
+        this.toasterTopBody = new Image(300, 450, "toasterTopBody.png");
+        this.toasterMidBody = new Image(300, 496, "toasterMidBody.png");
+        this.toasterBottemBody = new Image(300, 546, "toasterBottemBody.png");
         this.canvas = canvas;
     }
 
     public void addToCanvas(CanvasWindow canvas) {
-        canvas.add(toasterBody);
+        canvas.add(toasterTopBody);
+        canvas.add(toasterMidBody);
+        canvas.add(toasterBottemBody);
     }
 
 
