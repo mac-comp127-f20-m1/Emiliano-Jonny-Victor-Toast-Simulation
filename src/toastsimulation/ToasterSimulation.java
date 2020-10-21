@@ -12,6 +12,7 @@ import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.Point;
 import edu.macalester.graphics.Rectangle;
 import edu.macalester.graphics.ui.Button;
+import edu.macalester.graphics.ui.TextField;
 public class ToasterSimulation {
     private Bagel bagel;
     private Toaster toaster;
@@ -28,6 +29,8 @@ public class ToasterSimulation {
     private double animationParameter;
     private boolean touchingSlit;
     private boolean inSlit;
+    private boolean isToasting;
+    private TextField timeInput;
 
     private final double BREAD_RADIUS = 350;  
     private Bagel bagel2;
@@ -55,9 +58,14 @@ public class ToasterSimulation {
         lever = new Rectangle(255,700,60,30);
         lever.setFillColor(Color.DARK_GRAY);
 
-// johnnny farts
+        
+        
         canvas = new CanvasWindow("TOAST!", CANVAS_WIDTH, CANVAS_HEIGHT);
         
+        timeInput = new TextField();
+        timeInput.setPosition(0, CANVAS_WIDTH * .1);
+
+
         createBread();
         createToaster();
 
@@ -77,14 +85,16 @@ public class ToasterSimulation {
         this.bagelShape = bagel.getShape(); 
         touchingSlit = false;
         inSlit = false;
+        isToasting = true;
 
         animateBagel1(); 
         animateLever();
-        insertBagelIntoSlit();
+
         
         canvas.animate(() ->
         {
             insertBagelIntoSlit();
+            toastBread();
             // checkBounds();
             // if(inSlit == false){
             //     ;
@@ -98,6 +108,7 @@ public class ToasterSimulation {
             // }
             
         });
+        
         // removeBreadFromCanvas();
         
     }
@@ -196,8 +207,8 @@ public class ToasterSimulation {
                     animateMethod();
                     if (lever.getY() <= 699){
                         lever.setY(699);
-                    } else if (lever.getY() >= 850) {
-                        lever.setY(850);
+                    } else if (lever.getY() >= 860) {
+                        lever.setY(860);
                     }
                 } else if (isLeverObject(event.getPosition())) {
                     lever.setPosition(
@@ -206,13 +217,38 @@ public class ToasterSimulation {
                     animateMethod();
                     if (lever.getY() <= 699){
                         lever.setY(699);
-                    } else if (lever.getY() >= 850) {
-                        lever.setY(850);
+                    } else if (lever.getY() >= 860) {
+                        lever.setY(860);
                     }
                 }
             }
         );
         animateMethod();
+    }
+
+    public boolean isLeverDownWithBread(){
+        if(inSlit && lever.getY() >= 860){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public void toastBread(){
+        if(isLeverDownWithBread() && isToasting){
+            bagel.getShape().setFillColor(Color.BLACK);
+            canvas.add(timeInput);
+            while(!timeInput.getText().equalsIgnoreCase(" ")){
+                canvas.pause(100);
+            }
+            timeInput.onChange(event -> canvas.pause(1000*Integer.parseInt(timeInput.getText())));
+            
+
+            isToasting = false;
+            lever.setY(699);
+            bagel.getShape().setY(341);
+        }
     }
 
     public boolean isBreadObject(Point point){
