@@ -240,7 +240,7 @@ public class ToasterSimulation {
             bagel.getShape().setFillColor(Color.BLACK);
             canvas.add(timeInput);
             while(!timeInput.getText().equalsIgnoreCase(" ")){
-                canvas.pause(100);
+                ;
             }
             timeInput.onChange(event -> canvas.pause(1000*Integer.parseInt(timeInput.getText())));
             
