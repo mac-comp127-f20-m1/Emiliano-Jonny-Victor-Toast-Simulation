@@ -12,6 +12,7 @@ public class Bagel {
     private double centerY;
     private double maxX;
     private double maxY;
+    private int bagelCode;
 
     private Ellipse bagelBread;
     private final double BALL_RADIUS = 150; 

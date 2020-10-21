@@ -65,6 +65,7 @@ public class ToasterSimulation {
         toaster.addToCanvas(canvas);
         canvas.add(slitBoundary1);
         bagel.addToCanvas(canvas);
+        bagel2.addToCanvas(canvas);
         overLappingBagel(); 
         
        
@@ -138,7 +139,7 @@ public class ToasterSimulation {
     public void animateBagel1(){
         canvas.onDrag(
             event ->{
-                if(isBreadObject(event.getPosition())){
+                if(isBreadObject(event.getPosition()) && inSlit == false  ){
                     bagelShape.setPosition(
                     bagelShape.getX() + event.getDelta().getX(),
                     bagelShape.getY() + event.getDelta().getY());
@@ -240,7 +241,8 @@ public class ToasterSimulation {
     }
     public void createBread(){
         bagel = new Bagel(303, 303, CANVAS_WIDTH, CANVAS_HEIGHT);
-        // bagel2 = new Bagel(303, 600, CANVAS_WIDTH, CANVAS_HEIGHT);
+        bagel2 = new Bagel(303, 600, CANVAS_WIDTH, CANVAS_HEIGHT);
+ 
     }
     public void createToaster(){
         toaster = new Toaster(canvas);
