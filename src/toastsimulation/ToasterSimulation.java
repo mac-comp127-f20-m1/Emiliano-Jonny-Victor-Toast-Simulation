@@ -55,7 +55,7 @@ public class ToasterSimulation {
         lever = new Rectangle(255,700,60,30);
         lever.setFillColor(Color.DARK_GRAY);
 
-
+// johnnny farts
         canvas = new CanvasWindow("TOAST!", CANVAS_WIDTH, CANVAS_HEIGHT);
         
         createBread();
