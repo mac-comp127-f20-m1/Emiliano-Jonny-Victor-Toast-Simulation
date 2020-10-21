@@ -79,11 +79,11 @@ public class ToasterSimulation {
 
         animateBagel1(); 
         animateLever();
-        insertInSlot();
+        insertBagelIntoSlit();
         
         canvas.animate(() ->
         {
-            insertInSlot();
+            insertBagelIntoSlit();
             // checkBounds();
             // if(inSlit == false){
             //     ;
@@ -108,8 +108,8 @@ public class ToasterSimulation {
         toaster.addBottomBody();
     }
 
-    public void insertInSlot(){
-        checkSlitBounds();
+    public void insertBagelIntoSlit(){
+        checkIfBagelIsOverSlit();
         canvas.onMouseUp(event -> {
             if(touchingSlit == true){
                 bagel.getShape().setPosition(443,341);
@@ -122,7 +122,7 @@ public class ToasterSimulation {
         });
     }
 
-    public void checkSlitBounds() {
+    public void checkIfBagelIsOverSlit() {
         if (bagel.getShape().getX()>392 && 
             bagel.getShape().getX()+bagel.getRadius()<792 &&
             canvas.getElementAt(bagel.getShape().getX()+bagel.getRadius(), 
@@ -133,10 +133,6 @@ public class ToasterSimulation {
             canvas.pause(300);
         }
         
-    }
-
-    public void leverBreadInteraction(){
-
     }
 
     public void animateBagel1(){
