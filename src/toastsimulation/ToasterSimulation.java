@@ -65,7 +65,7 @@ public class ToasterSimulation {
         toaster.addToCanvas(canvas);
         canvas.add(slitBoundary1);
         bagel.addToCanvas(canvas);
-        bagel2.addToCanvas(canvas);
+        // bagel2.addToCanvas(canvas);
         overLappingBagel(); 
         
        
