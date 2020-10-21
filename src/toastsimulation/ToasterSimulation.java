@@ -184,7 +184,21 @@ public class ToasterSimulation {
     public void animateLever(){
         canvas.onDrag(
             event -> {
-                if (isLeverObject(event.getPosition())) {
+                Double change = event.getDelta().getY();
+                if (isLeverObject(event.getPosition()) && inSlit == true) {
+                    lever.setPosition(
+                        lever.getX(),
+                        lever.getY() + change);
+                    bagelShape.setPosition(
+                        bagelShape.getX(),
+                        bagelShape.getY() + change);
+                    animateMethod();
+                    if (lever.getY() <= 699){
+                        lever.setY(699);
+                    } else if (lever.getY() >= 850) {
+                        lever.setY(850);
+                    }
+                } else if (isLeverObject(event.getPosition())) {
                     lever.setPosition(
                         lever.getX(),
                         lever.getY() + event.getDelta().getY());
