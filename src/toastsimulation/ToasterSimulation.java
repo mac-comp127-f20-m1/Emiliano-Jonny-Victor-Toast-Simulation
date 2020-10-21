@@ -26,6 +26,8 @@ public class ToasterSimulation {
     private GraphicsText timeLeft;
     private GraphicsGroup group;
     private double animationParameter;
+    private boolean touchingSlit;
+    private boolean inSlit;
 
     private final double BREAD_RADIUS = 350;  
     private Bagel bagel2;
@@ -65,7 +67,6 @@ public class ToasterSimulation {
         bagel.addToCanvas(canvas);
         overLappingBagel(); 
         
-        // delete this after pulled 
        
         // canvas.add(slitBoundary2); 
         canvas.add(lever); 
@@ -73,19 +74,27 @@ public class ToasterSimulation {
 
         // bagel2.addToCanvas(canvas);
         this.bagelShape = bagel.getShape(); 
+        touchingSlit = false;
+        inSlit = false;
 
         animateBagel1(); 
         animateLever();
+        insertInSlot();
+        
         canvas.animate(() ->
         {
-            if(isAnimating == true){
-                checkBounds();
-            }else if(!bagel.getShape().equals(null)){
-               bagel.getShape().moveBy(0,30 * dy);
-               if(bagel.getShape().getY() > 800){
-                   bagel.removeFromCanvas(canvas);
-                }
-            }
+            insertInSlot();
+            // checkBounds();
+            // if(inSlit == false){
+            //     ;
+            // }else if(bagel.getShape().getY() > 800){
+            //    bagel.getShape().moveBy(0,30 * dy);
+            //    if(bagel.getShape().getY() > 800){
+            //     bagel.getShape().setFillColor(Color.BLACK);
+            //     canvas.pause(3000);
+            //     bagel.getShape().moveBy(0, -50);
+            //     }
+            // }
             
         });
         // removeBreadFromCanvas();
@@ -99,17 +108,35 @@ public class ToasterSimulation {
         toaster.addBottomBody();
     }
 
-    public void checkBounds() {
+    public void insertInSlot(){
+        checkSlitBounds();
+        canvas.onMouseUp(event -> {
+            if(touchingSlit == true){
+                bagel.getShape().setPosition(443,341);
+                inSlit = true;
+                touchingSlit = false;
+            }
+            else{
+                return;
+            }
+        });
+    }
+
+    public void checkSlitBounds() {
         if (bagel.getShape().getX()>392 && 
             bagel.getShape().getX()+bagel.getRadius()<792 &&
             canvas.getElementAt(bagel.getShape().getX()+bagel.getRadius(), 
             bagel.getShape().getY()+(2*bagel.getRadius())) 
             instanceof Rectangle) {
 
-            isAnimating = false;
+            touchingSlit = true;
             canvas.pause(300);
         }
         
+    }
+
+    public void leverBreadInteraction(){
+
     }
 
     public void animateBagel1(){
