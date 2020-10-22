@@ -35,6 +35,7 @@ public class ToasterSimulation {
     private GraphicsText timeInputDirections1;
     private GraphicsText timeInputDirections2;
     private Integer toastTime;
+    private Button setTimerButton;
 
 
     private final double BREAD_RADIUS = 350;  
@@ -65,7 +66,7 @@ public class ToasterSimulation {
 
         this.toastTime = 0;
         
-        
+        setTimerButton = new Button("Set Time");
         
         canvas = new CanvasWindow("TOAST!", CANVAS_WIDTH, CANVAS_HEIGHT);
 
@@ -105,6 +106,13 @@ public class ToasterSimulation {
         
         canvas.animate(() ->
         {
+            // if(canvas.getKeysPressed().contains(Key.RETURN_OR_ENTER)){
+
+            //     canvas.onKeyDown(event -> toastTime = 1000*Integer.parseInt(timeInput.getText()));
+                
+            //     System.out.println(3);
+            // }
+            
             insertBagelIntoSlit();
             toastBread();
             // checkBounds();
@@ -126,14 +134,17 @@ public class ToasterSimulation {
     }
 
     public void createToastControls(){
+        setTimerButton.setPosition(CANVAS_WIDTH*.5,CANVAS_HEIGHT*.62);
         timeInput.setPosition(CANVAS_WIDTH*.5,CANVAS_HEIGHT*.6);
         timeInputDirections1.setPosition(CANVAS_WIDTH*.75,CANVAS_HEIGHT*.6);
         timeInputDirections1.setText("type in the second of toasting then");
         timeInputDirections2.setPosition(CANVAS_WIDTH*.72,CANVAS_HEIGHT*.61);
-        timeInputDirections2.setText("press enter and pull the lever for some toast action!");
+        timeInputDirections2.setText("press the button and pull the lever for some toast action!");
+        canvas.add(setTimerButton);
         canvas.add(timeInput);
         canvas.add(timeInputDirections1);
         canvas.add(timeInputDirections2);
+        setTimerButton.onClick(()->toastTime = 1000*Integer.parseInt(timeInput.getText()));
 
     }
 
