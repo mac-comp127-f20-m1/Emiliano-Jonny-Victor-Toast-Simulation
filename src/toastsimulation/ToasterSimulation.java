@@ -17,6 +17,7 @@ import edu.macalester.graphics.ui.Button;
 import edu.macalester.graphics.ui.TextField;
 public class ToasterSimulation {
     private Bagel bagel;
+    private Bagel middleBagel; 
     private Toaster toaster;
     private CanvasWindow canvas;
     private static final int CANVAS_WIDTH = 1200;
@@ -86,7 +87,8 @@ public class ToasterSimulation {
         toaster.addToCanvas(canvas);
         canvas.add(slitBoundary1);
         bagel.addToCanvas(canvas);
-        // bagel2.addToCanvas(canvas);
+        bagel.addMiddleToCanvas(canvas);
+        System.out.println("adding to canvas");
         overLappingBagel(); 
         
        
@@ -318,7 +320,8 @@ public class ToasterSimulation {
     }
     public void createBread(){
         bagel = new Bagel(303, 303, CANVAS_WIDTH, CANVAS_HEIGHT);
-        bagel2 = new Bagel(303, 600, CANVAS_WIDTH, CANVAS_HEIGHT);
+        // middleBagel = new Bagel(200, 200, CANVAS_WIDTH, CANVAS_HEIGHT);
+        // middleBagel.getShape().setFillColor(Color.BLACK);
  
     }
     public void createToaster(){
