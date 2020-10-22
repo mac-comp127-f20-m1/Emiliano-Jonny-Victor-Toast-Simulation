@@ -1,4 +1,5 @@
 package toastsimulation;
+
 import java.awt.Color;
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Ellipse;
@@ -11,6 +12,7 @@ import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.Point;
 import edu.macalester.graphics.Rectangle;
+import edu.macalester.graphics.events.Key;
 import edu.macalester.graphics.ui.Button;
 import edu.macalester.graphics.ui.TextField;
 public class ToasterSimulation {
@@ -23,14 +25,17 @@ public class ToasterSimulation {
     private double y;
     private double width = CANVAS_WIDTH;
     private double height = CANVAS_HEIGHT;
-    private GraphicsText cripsyness;
-    private GraphicsText timeLeft;
+
     private GraphicsGroup group;
     private double animationParameter;
     private boolean touchingSlit;
     private boolean inSlit;
     private boolean isToasting;
     private TextField timeInput;
+    private GraphicsText timeInputDirections1;
+    private GraphicsText timeInputDirections2;
+    private Integer toastTime;
+
 
     private final double BREAD_RADIUS = 350;  
     private Bagel bagel2;
@@ -58,16 +63,23 @@ public class ToasterSimulation {
         lever = new Rectangle(255,700,60,30);
         lever.setFillColor(Color.DARK_GRAY);
 
+        this.toastTime = 0;
+        
         
         
         canvas = new CanvasWindow("TOAST!", CANVAS_WIDTH, CANVAS_HEIGHT);
+
+        timeInputDirections1 = new GraphicsText();
+        timeInputDirections2 = new GraphicsText();
+
         
         timeInput = new TextField();
-        timeInput.setPosition(0, CANVAS_WIDTH * .1);
+
 
 
         createBread();
         createToaster();
+        createToastControls();
 
         isAnimating = true;
         toaster.addToCanvas(canvas);
@@ -113,6 +125,18 @@ public class ToasterSimulation {
         
     }
 
+    public void createToastControls(){
+        timeInput.setPosition(CANVAS_WIDTH*.5,CANVAS_HEIGHT*.6);
+        timeInputDirections1.setPosition(CANVAS_WIDTH*.75,CANVAS_HEIGHT*.6);
+        timeInputDirections1.setText("type in the second of toasting then");
+        timeInputDirections2.setPosition(CANVAS_WIDTH*.72,CANVAS_HEIGHT*.61);
+        timeInputDirections2.setText("press enter and pull the lever for some toast action!");
+        canvas.add(timeInput);
+        canvas.add(timeInputDirections1);
+        canvas.add(timeInputDirections2);
+
+    }
+
     public void overLappingBagel(){
         toaster.removeMiddleBody();
         toaster.addMiddleBody();
@@ -156,6 +180,7 @@ public class ToasterSimulation {
                     bagelShape.getY() + event.getDelta().getY());
                     animateMethod();
                 }
+
             }
         );
     }
@@ -236,15 +261,20 @@ public class ToasterSimulation {
     }
 
     public void toastBread(){
+        if(canvas.getKeysPressed().contains(Key.RETURN_OR_ENTER)){
+            toastTime = 1000*Integer.parseInt(timeInput.getText());
+            System.out.println(1000*Integer.parseInt(timeInput.getText()));
+        }
+
         if(isLeverDownWithBread() && isToasting){
             bagel.getShape().setFillColor(Color.BLACK);
-            canvas.add(timeInput);
-            while(!timeInput.getText().equalsIgnoreCase(" ")){
-                ;
-            }
-            timeInput.onChange(event -> canvas.pause(1000*Integer.parseInt(timeInput.getText())));
+            // canvas.add(timeInput);
+            // while(!timeInput.getText().equalsIgnoreCase(" ")){
+            //     ;
+            // }
+            // timeInput.onChange(event -> canvas.pause(1000*Integer.parseInt(timeInput.getText())));
             
-
+            canvas.pause(toastTime);
             isToasting = false;
             lever.setY(699);
             bagel.getShape().setY(341);
