@@ -174,8 +174,7 @@ public class ToasterSimulation {
                 bagelHoleShape.setCenter(bagelShape.getCenter());
                 inSlit = true;
                 touchingSlit = false;
-            }
-            else{
+            } else{
                 return;
             }
         });
@@ -199,14 +198,22 @@ public class ToasterSimulation {
         canvas.onDrag(
             event ->{
                 if(isBreadObject(event.getPosition()) && inSlit == false  ){
-                    bagelShape.setPosition(
-                    bagelShape.getX() + event.getDelta().getX(),
-                    bagelShape.getY() + event.getDelta().getY());
+                    if (bagelShape.getY() >= 200) {
+                        bagelShape.setPosition(
+                            bagelShape.getX() + event.getDelta().getX(),
+                            bagelShape.getY() -5);
 
-                    bagelHoleShape.setCenter(bagelShape.getCenter());
-                    animateMethod();
+                        bagelHoleShape.setCenter(bagelShape.getCenter());
+                        animateMethod();
+                    } else {
+                        bagelShape.setPosition(
+                            bagelShape.getX() + event.getDelta().getX(),
+                            bagelShape.getY() + event.getDelta().getY());
+
+                        bagelHoleShape.setCenter(bagelShape.getCenter());
+                        animateMethod();
+                    }                 
                 }
-
             }
         );
     }
