@@ -37,6 +37,7 @@ public class ToasterSimulation {
     private GraphicsText timeInputDirections2;
     private Integer toastTime;
     private Button setTimerButton;
+    private Ellipse bagelHoleShape;
 
 
     private final double BREAD_RADIUS = 350;  
@@ -87,9 +88,8 @@ public class ToasterSimulation {
         toaster.addToCanvas(canvas);
         canvas.add(slitBoundary1);
         bagel.addToCanvas(canvas);
-        bagel.addMiddleToCanvas(canvas);
-        // middleBagel.addToCanvas(canvas);
-        System.out.println("adding to canvas");
+        bagel.addBagelHoleCanvas(canvas);
+
         overLappingBagel(); 
         
        
@@ -99,6 +99,7 @@ public class ToasterSimulation {
 
         // bagel2.addToCanvas(canvas);
         this.bagelShape = bagel.getShape(); 
+        this.bagelHoleShape = bagel.getHoleShape();
         touchingSlit = false;
         inSlit = false;
         isToasting = true;
@@ -163,6 +164,7 @@ public class ToasterSimulation {
         canvas.onMouseUp(event -> {
             if(touchingSlit == true){
                 bagel.getShape().setPosition(443,341);
+                bagelHoleShape.setCenter(bagelShape.getCenter());
                 inSlit = true;
                 touchingSlit = false;
             }
@@ -185,6 +187,7 @@ public class ToasterSimulation {
         
     }
 
+
     public void animateBagel1(){
         canvas.onDrag(
             event ->{
@@ -192,6 +195,8 @@ public class ToasterSimulation {
                     bagelShape.setPosition(
                     bagelShape.getX() + event.getDelta().getX(),
                     bagelShape.getY() + event.getDelta().getY());
+
+                    bagelHoleShape.setCenter(bagelShape.getCenter());
                     animateMethod();
                 }
 
@@ -243,6 +248,7 @@ public class ToasterSimulation {
                     bagelShape.setPosition(
                         bagelShape.getX(),
                         bagelShape.getY() + change);
+                    bagelHoleShape.setCenter(bagelShape.getCenter());
                     animateMethod();
                     if (lever.getY() <= 699){
                         lever.setY(699);
@@ -306,6 +312,7 @@ public class ToasterSimulation {
             isToasting = false;
             lever.setY(699);
             bagel.getShape().setY(341);
+            bagelHoleShape.setCenter(bagelShape.getCenter());
         }
     }
 
@@ -334,9 +341,8 @@ public class ToasterSimulation {
         ToasterSimulation simulation = new ToasterSimulation();
     }
     public void createBread(){
-        bagel = new Bagel(303, 303, CANVAS_WIDTH, CANVAS_HEIGHT);
-        middleBagel = new Bagel(200, 200, CANVAS_WIDTH, CANVAS_HEIGHT);
-        middleBagel.getShape().setFillColor(Color.BLACK);
+        bagel = new Bagel(303, 303);
+
  
     }
     public void createToaster(){

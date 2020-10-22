@@ -12,43 +12,38 @@ import javax.sound.midi.MidiFileFormat;
 public class Bagel {
     private double centerX;
     private double centerY;
-    private double maxX;
-    private double maxY;
-    private Ellipse middleBagel; 
 
     private Ellipse bagelBread;
+    private Ellipse bagelHole;
     private final double BALL_RADIUS = 150; 
     public static final Color breadColor = new Color(255,255,153);
 
     public Bagel(
         double centerX,
-        double centerY,
-        double maxX,
-        double maxY
+        double centerY
         ){
         this.centerX = centerX;
         this.centerY = centerY;
-        this.maxX = maxX;
-        this.maxY = maxY;
-        Ellipse middleBagel = new Ellipse(centerX*.25 - BALL_RADIUS, centerY*.25 - BALL_RADIUS, BALL_RADIUS * 2 /4, BALL_RADIUS * 2/4); 
-        Ellipse bagelBread = new Ellipse(centerX - BALL_RADIUS, centerY - BALL_RADIUS, BALL_RADIUS * 2, BALL_RADIUS * 2);
-        
-        this.bagelBread = bagelBread;
-        this.middleBagel = middleBagel;
+         
+        this.bagelBread = new Ellipse(centerX - BALL_RADIUS, centerY - BALL_RADIUS, BALL_RADIUS * 2, BALL_RADIUS * 2);
+        this.bagelHole = new Ellipse(centerX- .25 * BALL_RADIUS, centerY - .25 * BALL_RADIUS, BALL_RADIUS * 2 /4, BALL_RADIUS * 2/4);
+
+
+
         bagelBread.setStrokeColor(breadColor);
         bagelBread.setFillColor(breadColor);
-        middleBagel.setStrokeColor(Color.BLACK);
-        middleBagel.setFillColor(Color.black);
+
     }
 
     public void addToCanvas(CanvasWindow canvas) {
-        canvas.add(middleBagel);
         canvas.add(bagelBread);
        
     }
 
-    public void addMiddleToCanvas(CanvasWindow canvas) {
-        canvas.add(middleBagel);
+    public void addBagelHoleCanvas(CanvasWindow canvas) {
+        
+        bagelHole.setFillColor(Color.WHITE);
+        canvas.add(bagelHole);
     }
 
     /**
@@ -73,6 +68,9 @@ public class Bagel {
     }
     public Ellipse getShape(){
         return bagelBread; 
+    }
+    public Ellipse getHoleShape(){
+        return bagelHole; 
     }
 
 
