@@ -41,7 +41,7 @@ public class Bagel {
     }
 
     public void addBagelHoleCanvas(CanvasWindow canvas) {
-        
+        bagelHole.setStrokeColor(Color.WHITE);
         bagelHole.setFillColor(Color.WHITE);
         canvas.add(bagelHole);
     }

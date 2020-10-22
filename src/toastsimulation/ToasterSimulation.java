@@ -81,7 +81,7 @@ public class ToasterSimulation {
 
         ratings= new GraphicsText();
         ratings.setCenter(2, CANVAS_HEIGHT*.2);
-        ratings.setFontSize(CANVAS_HEIGHT*.05);
+        ratings.setFontSize(CANVAS_HEIGHT*.04);
         
         timeInput = new TextField();
 
@@ -307,7 +307,8 @@ public class ToasterSimulation {
             else if(toastTime/1000<=6){
                 Color toastColor = new Color(153,102,0);
                 bagelShape.setFillColor(toastColor);
-                ratings.setText("Wow I wash the line between technology and reality was even more blurred so I can reach in and eat that bagel!");
+                ratings.setFontSize(CANVAS_HEIGHT*.01);
+                ratings.setText("Wow I wish the line between technology and reality was even more blurred so I can reach in and eat that bagel!");
             }
             else if(toastTime/1000>=7){
                 bagelShape.setFillColor(Color.BLACK);
