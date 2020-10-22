@@ -1,6 +1,9 @@
 package toastsimulation;
 
 import java.awt.Color;
+
+import org.w3c.dom.Text;
+
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Ellipse;
 /**
@@ -38,6 +41,7 @@ public class ToasterSimulation {
     private Integer toastTime;
     private Button setTimerButton;
     private Ellipse bagelHoleShape;
+    private GraphicsText ratings;
 
 
     private final double BREAD_RADIUS = 350;  
@@ -75,6 +79,9 @@ public class ToasterSimulation {
         timeInputDirections1 = new GraphicsText();
         timeInputDirections2 = new GraphicsText();
 
+        ratings= new GraphicsText();
+        ratings.setCenter(2, CANVAS_HEIGHT*.2);
+        ratings.setFontSize(CANVAS_HEIGHT*.05);
         
         timeInput = new TextField();
 
@@ -290,17 +297,21 @@ public class ToasterSimulation {
             if(toastTime/1000<=2){
                 Color toastColor = new Color(245,222,179);
                 bagelShape.setFillColor(toastColor);
+                ratings.setText("Like biting into an icecube!");
             }
             else if(toastTime/1000<=4){
                 Color toastColor = new Color(255,204,51);
                 bagelShape.setFillColor(toastColor);
+                ratings.setText("I'd slap some cream cheese on that!");
             }
             else if(toastTime/1000<=6){
                 Color toastColor = new Color(153,102,0);
                 bagelShape.setFillColor(toastColor);
+                ratings.setText("Wow I wash the line between technology and reality was even more blurred so I can reach in and eat that bagel!");
             }
             else if(toastTime/1000>=7){
                 bagelShape.setFillColor(Color.BLACK);
+                ratings.setText("Dude I wouldn't feed that to my mother.");
             }
             // canvas.add(timeInput);
             // while(!timeInput.getText().equalsIgnoreCase(" ")){
@@ -313,6 +324,7 @@ public class ToasterSimulation {
             lever.setY(699);
             bagel.getShape().setY(341);
             bagelHoleShape.setCenter(bagelShape.getCenter());
+            canvas.add(ratings);
         }
     }
 
