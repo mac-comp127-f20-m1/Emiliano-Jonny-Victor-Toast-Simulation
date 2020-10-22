@@ -29,9 +29,10 @@ public class Bagel {
         this.centerX = centerX;
         this.centerY = centerY;
         this.maxX = maxX;
-        this.maxY = maxY; 
+        this.maxY = maxY;
+        Ellipse middleBagel = new Ellipse(centerX*.25 - BALL_RADIUS, centerY*.25 - BALL_RADIUS, BALL_RADIUS * 2 /4, BALL_RADIUS * 2/4); 
         Ellipse bagelBread = new Ellipse(centerX - BALL_RADIUS, centerY - BALL_RADIUS, BALL_RADIUS * 2, BALL_RADIUS * 2);
-        Ellipse middleBagel = new Ellipse(centerX*.25 - BALL_RADIUS, centerY*.25 - BALL_RADIUS, BALL_RADIUS * 2 /4, BALL_RADIUS * 2/4);
+        
         this.bagelBread = bagelBread;
         this.middleBagel = middleBagel;
         bagelBread.setStrokeColor(breadColor);
@@ -41,7 +42,9 @@ public class Bagel {
     }
 
     public void addToCanvas(CanvasWindow canvas) {
+        canvas.add(middleBagel);
         canvas.add(bagelBread);
+       
     }
 
     public void addMiddleToCanvas(CanvasWindow canvas) {

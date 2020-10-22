@@ -88,6 +88,7 @@ public class ToasterSimulation {
         canvas.add(slitBoundary1);
         bagel.addToCanvas(canvas);
         bagel.addMiddleToCanvas(canvas);
+        // middleBagel.addToCanvas(canvas);
         System.out.println("adding to canvas");
         overLappingBagel(); 
         
@@ -280,7 +281,21 @@ public class ToasterSimulation {
         }
 
         if(isLeverDownWithBread() && isToasting){
-            bagel.getShape().setFillColor(Color.BLACK);
+            if(toastTime/1000<=2){
+                Color toastColor = new Color(245,222,179);
+                bagelShape.setFillColor(toastColor);
+            }
+            else if(toastTime/1000<=4){
+                Color toastColor = new Color(255,204,51);
+                bagelShape.setFillColor(toastColor);
+            }
+            else if(toastTime/1000<=6){
+                Color toastColor = new Color(153,102,0);
+                bagelShape.setFillColor(toastColor);
+            }
+            else if(toastTime/1000>=7){
+                bagelShape.setFillColor(Color.BLACK);
+            }
             // canvas.add(timeInput);
             // while(!timeInput.getText().equalsIgnoreCase(" ")){
             //     ;
@@ -320,8 +335,8 @@ public class ToasterSimulation {
     }
     public void createBread(){
         bagel = new Bagel(303, 303, CANVAS_WIDTH, CANVAS_HEIGHT);
-        // middleBagel = new Bagel(200, 200, CANVAS_WIDTH, CANVAS_HEIGHT);
-        // middleBagel.getShape().setFillColor(Color.BLACK);
+        middleBagel = new Bagel(200, 200, CANVAS_WIDTH, CANVAS_HEIGHT);
+        middleBagel.getShape().setFillColor(Color.BLACK);
  
     }
     public void createToaster(){
