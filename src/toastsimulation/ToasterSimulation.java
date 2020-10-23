@@ -111,10 +111,7 @@ public class ToasterSimulation {
         {    
             insertBagelIntoSlit();
             toastBread();
-            System.out.println(sumTime);
-        });
-
-        
+        }); 
     }
 
     public void createToastControls(){
@@ -296,6 +293,7 @@ public class ToasterSimulation {
             canvas.add(ratings);
             inSlit = false;
             touchingSlit = false;
+            isToasting = true;
 
         } else if (isLeverDownWithBread() && isToasting && toastTime/1000==127){
                 bagelShape.setFillColor(Color.WHITE);
@@ -312,6 +310,7 @@ public class ToasterSimulation {
                 canvas.add(ratings);
                 inSlit = false;
                 touchingSlit = false;
+                isToasting = true;
         }
 
             
