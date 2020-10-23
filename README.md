@@ -8,8 +8,8 @@ enclosed you will see a series of classes, each of which control some functional
 Are you sick of making real bread? Having wait real time? Well ***you're*** in ***luck!!!!*** 
 Follow the steps provided and you will have bagel's toaster fasther than you can explain ***inheritance!!***
 
-## STEPS:
-Step
+## Steps:
+Steps: 
 1) Grab and drag the bagel to the first slot from the top
 2) Once inserted, enter a time and ***press*** "Set Time" 
 3) After pressing "Set Time" click and drag the toaster lever to set it's position in toasting mode (at the bottom)
