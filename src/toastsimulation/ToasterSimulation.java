@@ -22,6 +22,7 @@ import edu.macalester.graphics.ui.TextField;
  *  tools to create an effective and easy to use computer program.
  */
 public class ToasterSimulation {
+
     /**Implements the bagel class into ToasterSimulation */
     private Bagel bagel;
     private Ellipse bagelShape;
@@ -37,7 +38,6 @@ public class ToasterSimulation {
     private static final int CANVAS_WIDTH = 1200;
     private static final int CANVAS_HEIGHT = 1200;
 
-    private double animationParameter;
 
     /** slits for monitoring if bagel enter toaster */
     private boolean touchingSlit;
@@ -49,6 +49,7 @@ public class ToasterSimulation {
     private GraphicsText timeInputDirections2;
     private GraphicsText ratings;
     private Image secretImage;
+    private Image background;
 
     /** monitoring time inside toaster*/
     private int sumTime;
@@ -60,7 +61,7 @@ public class ToasterSimulation {
 
     private Rectangle lever;
 
-
+    //Frankly I have no idea wtf these do
     private boolean flag1 = true;
     private boolean flag2 = true;
 
@@ -140,6 +141,8 @@ public class ToasterSimulation {
 
     /**Adds the objects that are visible to the user to the canvas */
     public void addAllToCanvas() {
+        Image background = new Image("countertop.jpg");
+        canvas.add(background);
         toaster.addToCanvas(canvas);
         canvas.add(slitBoundary1);
         bagel.addToCanvas(canvas);
@@ -214,7 +217,7 @@ public class ToasterSimulation {
         canvas.onDrag(
             event -> {
                 if (isBreadObject(event.getPosition()) && inSlit == false) {
-                    if (bagelShape.getY() >= CANVAS_HEIGHT * .166666667) {
+                    if (bagelShape.getY() >= 199) {
                         bagelShape.setPosition(
                             bagelShape.getX() + event.getDelta().getX(),
                             bagelShape.getY() - 3);
@@ -231,20 +234,6 @@ public class ToasterSimulation {
                     }
                 }
             });
-    }
-    /**A method that would have been implemented if we created a second bagel */
-    // public void animateBagel2() {
-    //     Ellipse bagelShape2 = bagel2.getShape();
-    //     canvas.onDrag(
-    //         event -> bagelShape2.setPosition(
-    //             bagelShape2.getX() + event.getDelta().getX(),
-    //             bagelShape2.getY() + event.getDelta().getY()));
-    //     animateMethod();
-    // }
-
-    //Check me on accuracy
-    public double getAnimationParameter() {
-        return animationParameter;
     }
 
     //Check me on accuracy
@@ -373,11 +362,6 @@ public class ToasterSimulation {
         } else {
             return false;
         }
-    }
-
-    // Check me on accuracy
-    public void setAnimationParameter(double animationParameter) {
-        this.animationParameter = animationParameter;
     }
 
     /**Main method that is used to run the toaster simulation program */
