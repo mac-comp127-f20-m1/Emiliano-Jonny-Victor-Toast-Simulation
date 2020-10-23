@@ -146,6 +146,11 @@ public class ToasterSimulation {
 
         
     }
+    // public void breadEnteredAgain(){
+    //     if(){
+
+    //     }
+    // }
 
     public void overLappingBagel(){
         toaster.removeMiddleBody();
@@ -185,11 +190,11 @@ public class ToasterSimulation {
     public void animateBagel1(){
         canvas.onDrag(
             event ->{
-                if(isBreadObject(event.getPosition()) && inSlit == false  ){
+                if(isBreadObject(event.getPosition()) && inSlit == false){
                     if (bagelShape.getY() >= CANVAS_HEIGHT * .166666667) {
                         bagelShape.setPosition(
                             bagelShape.getX() + event.getDelta().getX(),
-                            bagelShape.getY() -5);
+                            bagelShape.getY() -1);
 
                         bagelHoleShape.setCenter(bagelShape.getCenter());
                         animateMethod();
@@ -305,8 +310,8 @@ public class ToasterSimulation {
             }
             canvas.pause(toastTime);
             isToasting = false;
-            lever.setY(699);
-            bagel.getShape().setY(341);
+            lever.setY(CANVAS_HEIGHT * 0.5825);
+            bagel.getShape().setY(CANVAS_HEIGHT * 0.2841);
             bagelHoleShape.setCenter(bagelShape.getCenter());
             canvas.add(ratings);
             inSlit = false;
@@ -329,10 +334,7 @@ public class ToasterSimulation {
             inSlit = false;
             touchingSlit = false;
             isToasting = true;
-        }
-
-            
-        
+        } 
     }
 
     public boolean isBreadObject(Point point){
