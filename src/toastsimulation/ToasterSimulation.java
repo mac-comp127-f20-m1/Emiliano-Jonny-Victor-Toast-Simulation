@@ -2,7 +2,6 @@ package toastsimulation;
 
 import java.awt.Color;
 
-import org.w3c.dom.Text;
 
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Ellipse;
@@ -99,12 +98,8 @@ public class ToasterSimulation {
 
         overLappingBagel(); 
         
-       
-        // canvas.add(slitBoundary2); 
         canvas.add(lever); 
         
-
-        // bagel2.addToCanvas(canvas);
         this.bagelShape = bagel.getShape(); 
         this.bagelHoleShape = bagel.getHoleShape();
         touchingSlit = false;
@@ -116,31 +111,11 @@ public class ToasterSimulation {
 
         
         canvas.animate(() ->
-        {
-            // if(canvas.getKeysPressed().contains(Key.RETURN_OR_ENTER)){
-
-            //     canvas.onKeyDown(event -> toastTime = 1000*Integer.parseInt(timeInput.getText()));
-                
-            //     System.out.println(3);
-            // }
-            
+        {    
             insertBagelIntoSlit();
             toastBread();
-            // checkBounds();
-            // if(inSlit == false){
-            //     ;
-            // }else if(bagel.getShape().getY() > 800){
-            //    bagel.getShape().moveBy(0,30 * dy);
-            //    if(bagel.getShape().getY() > 800){
-            //     bagel.getShape().setFillColor(Color.BLACK);
-            //     canvas.pause(3000);
-            //     bagel.getShape().moveBy(0, -50);
-            //     }
-            // }
-            
         });
-        
-        // removeBreadFromCanvas();
+
         
     }
 
@@ -155,7 +130,7 @@ public class ToasterSimulation {
         canvas.add(timeInput);
         canvas.add(timeInputDirections1);
         canvas.add(timeInputDirections2);
-        setTimerButton.onClick(()->toastTime = 1000*Integer.parseInt(timeInput.getText()));
+        setTimerButton.onClick(()->toastTime = Utils.stringToMillliseconds(timeInput.getText()));
 
     }
 
@@ -235,7 +210,7 @@ public class ToasterSimulation {
         if(flag1 == false){
         canvas.onMouseDown(event ->
         flag1 = false);
-        }else{
+        } else{
         canvas.onMouseUp(event ->
             flag1 = true);
         }
@@ -245,7 +220,7 @@ public class ToasterSimulation {
         if(flag2 == false){
         canvas.onMouseDown(event ->
         flag2 = false);
-        }else{
+        } else{
         canvas.onMouseUp(event ->
             flag2 = true);
         }
@@ -288,18 +263,12 @@ public class ToasterSimulation {
     public boolean isLeverDownWithBread(){
         if(inSlit && lever.getY() >= 860){
             return true;
-        }
-        else{
+        } else{
             return false;
         }
     }
 
     public void toastBread(){
-        if(canvas.getKeysPressed().contains(Key.RETURN_OR_ENTER)){
-            toastTime = 1000*Integer.parseInt(timeInput.getText());
-            System.out.println(1000*Integer.parseInt(timeInput.getText()));
-        }
-
         if(isLeverDownWithBread() && isToasting){
             if(toastTime/1000<=2){
                 Color toastColor = new Color(245,222,179);
@@ -321,12 +290,7 @@ public class ToasterSimulation {
                 bagelShape.setFillColor(Color.BLACK);
                 ratings.setText("Dude I wouldn't feed that to my mother.");
             }
-            // canvas.add(timeInput);
-            // while(!timeInput.getText().equalsIgnoreCase(" ")){
-            //     ;
-            // }
-            // timeInput.onChange(event -> canvas.pause(1000*Integer.parseInt(timeInput.getText())));
-            
+
             canvas.pause(toastTime);
             isToasting = false;
             lever.setY(699);
