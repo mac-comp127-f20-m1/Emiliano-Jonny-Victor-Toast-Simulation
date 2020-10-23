@@ -29,7 +29,7 @@ public class Bagel {
         this.bagelBread = new Ellipse(centerX - BALL_RADIUS, centerY - BALL_RADIUS, BALL_RADIUS * 2, BALL_RADIUS * 2);
         this.bagelHole = new Ellipse(centerX- .25 * BALL_RADIUS, centerY - .25 * BALL_RADIUS, BALL_RADIUS * 2 /4, BALL_RADIUS * 2/4);
 
-        bagelBread.setStrokeColor(breadColor);
+        bagelBread.setStrokeColor(Color.WHITE);
         bagelBread.setFillColor(breadColor);
 
     }
