@@ -36,6 +36,7 @@ public class ToasterSimulation {
     private Ellipse bagelHoleShape;
     private GraphicsText ratings;
     private Image secretImage;
+    private int sumTime;
 
 
     private final double BREAD_RADIUS = 350;  
@@ -110,6 +111,7 @@ public class ToasterSimulation {
         {    
             insertBagelIntoSlit();
             toastBread();
+            System.out.println(sumTime);
         });
 
         
@@ -127,7 +129,7 @@ public class ToasterSimulation {
         canvas.add(timeInputDirections1);
         canvas.add(timeInputDirections2);
         setTimerButton.onClick(()->toastTime = Utils.stringToMillliseconds(timeInput.getText()));
-
+        sumTime += toastTime;
     }
 
     public void overLappingBagel(){
@@ -292,6 +294,8 @@ public class ToasterSimulation {
             bagel.getShape().setY(341);
             bagelHoleShape.setCenter(bagelShape.getCenter());
             canvas.add(ratings);
+            inSlit = false;
+            touchingSlit = false;
 
         } else if (isLeverDownWithBread() && isToasting && toastTime/1000==127){
                 bagelShape.setFillColor(Color.WHITE);
@@ -306,6 +310,8 @@ public class ToasterSimulation {
                 secretImage.setY(bagelShape.getY()-10);
                 canvas.add(secretImage);
                 canvas.add(ratings);
+                inSlit = false;
+                touchingSlit = false;
         }
 
             
