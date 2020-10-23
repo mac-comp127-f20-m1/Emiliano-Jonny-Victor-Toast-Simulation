@@ -194,7 +194,7 @@ public class ToasterSimulation {
                     if (bagelShape.getY() >= CANVAS_HEIGHT * .166666667) {
                         bagelShape.setPosition(
                             bagelShape.getX() + event.getDelta().getX(),
-                            bagelShape.getY() -1);
+                            bagelShape.getY() -3);
 
                         bagelHoleShape.setCenter(bagelShape.getCenter());
                         animateMethod();
