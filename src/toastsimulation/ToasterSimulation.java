@@ -125,8 +125,12 @@ public class ToasterSimulation {
         canvas.add(timeInput);
         canvas.add(timeInputDirections1);
         canvas.add(timeInputDirections2);
-        setTimerButton.onClick(()->toastTime = Utils.stringToMillliseconds(timeInput.getText()));
-        sumTime += toastTime;
+        setTimerButton.onClick(()->{
+            toastTime = 1000*Integer.parseInt(timeInput.getText());
+            sumTime += toastTime;
+        });
+
+        
     }
 
     public void overLappingBagel(){
@@ -220,7 +224,7 @@ public class ToasterSimulation {
             flag2 = true);
         }
     }
-
+ //[pp[]]
     public void animateLever(){
         canvas.onDrag(
             event -> {
