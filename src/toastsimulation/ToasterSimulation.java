@@ -21,6 +21,8 @@ public class ToasterSimulation {
     private Bagel bagel;
     private Ellipse bagelShape;
     private Ellipse bagelHoleShape;
+    private final double BREAD_RADIUS = 350;  
+    private Bagel bagel2;
 
     private Toaster toaster;
     private boolean isToasting;
@@ -30,26 +32,21 @@ public class ToasterSimulation {
     private static final int CANVAS_HEIGHT = 1200;
 
     private double animationParameter;
-
+    // slits for monitoring if bagel enter toaster 
     private boolean touchingSlit;
     private boolean inSlit;
     private Rectangle slitBoundary1;
-    private Rectangle slitBoundary2;
-   
+    // textfield boxes / images for canvas 
     private TextField timeInput;
     private GraphicsText timeInputDirections1;
     private GraphicsText timeInputDirections2;
     private GraphicsText ratings;
     private Image secretImage;
 
+    // monitoring time inside toaster 
     private int sumTime;
     private Integer toastTime;
     private Button setTimerButton;
-
-
-    private final double BREAD_RADIUS = 350;  
-    private Bagel bagel2;
-; 
     
     private boolean isAnimating;
     private boolean isDragable;
@@ -79,6 +76,11 @@ public class ToasterSimulation {
         animateBagel1(); 
         animateLever();
 
+        animateToaster();
+        
+    }
+
+    public void animateToaster(){
         canvas.animate(() ->
         {    
             insertBagelIntoSlit();
@@ -93,7 +95,6 @@ public class ToasterSimulation {
         
         canvas = new CanvasWindow("TOAST!", CANVAS_WIDTH, CANVAS_HEIGHT);
     }
-
 
     public void textGraphics(){
         timeInputDirections1 = new GraphicsText();
