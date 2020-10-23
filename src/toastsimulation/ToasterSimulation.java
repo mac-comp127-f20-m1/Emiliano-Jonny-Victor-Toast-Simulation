@@ -19,41 +19,49 @@ import edu.macalester.graphics.ui.Button;
 import edu.macalester.graphics.ui.TextField;
 public class ToasterSimulation {
     private Bagel bagel;
+    private Ellipse bagelShape;
+    private Ellipse bagelHoleShape;
+
     private Toaster toaster;
+    private boolean isToasting;
+
     private CanvasWindow canvas;
     private static final int CANVAS_WIDTH = 1200;
     private static final int CANVAS_HEIGHT = 1200;
 
     private double animationParameter;
+
     private boolean touchingSlit;
     private boolean inSlit;
-    private boolean isToasting;
+    private Rectangle slitBoundary1;
+    private Rectangle slitBoundary2;
+   
     private TextField timeInput;
     private GraphicsText timeInputDirections1;
     private GraphicsText timeInputDirections2;
-    private Integer toastTime;
-    private Button setTimerButton;
-    private Ellipse bagelHoleShape;
     private GraphicsText ratings;
     private Image secretImage;
+
     private int sumTime;
+    private Integer toastTime;
+    private Button setTimerButton;
 
 
     private final double BREAD_RADIUS = 350;  
     private Bagel bagel2;
 ; 
-    private Rectangle slitBoundary1;
-    private Rectangle slitBoundary2;
+    
     private boolean isAnimating;
     private boolean isDragable;
-    private double dy = .1; 
     
     private Rectangle lever; 
 
 
     private boolean flag1 = true;
     private boolean flag2 = true;
-    private Ellipse bagelShape;
+    
+
+
     public ToasterSimulation() {
         graphicToasterInterSections(); 
 
@@ -77,6 +85,7 @@ public class ToasterSimulation {
             toastBread();
         }); 
     }
+
     public void graphicObjectsForToaster(){
         secretImage = new Image("Design.png");
         
