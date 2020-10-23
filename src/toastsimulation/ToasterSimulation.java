@@ -288,7 +288,7 @@ public class ToasterSimulation {
             }
             else if(toastTime/1000>=7){
                 bagelShape.setFillColor(Color.BLACK);
-                ratings.setText("Dude I wouldn't feed that to my mother.");
+                ratings.setText("Dude I wouldn't feed that to my worst enemy.");
             }
 
             canvas.pause(toastTime);
