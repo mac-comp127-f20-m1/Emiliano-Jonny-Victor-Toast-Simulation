@@ -240,7 +240,7 @@ public class ToasterSimulation {
             flag2 = true);
         }
     }
- //[pp[]]
+
     public void animateLever(){
         canvas.onDrag(
             event -> {
@@ -285,23 +285,23 @@ public class ToasterSimulation {
 
     public void toastBread(){
         if(isLeverDownWithBread() && isToasting && toastTime/1000 != 127){
-            if(toastTime/1000<=2){
+            if(sumTime/1000<=2){
                 Color toastColor = new Color(245,222,179);
                 bagelShape.setFillColor(toastColor);
                 ratings.setText("Like biting into an icecube!");
             }
-            else if(toastTime/1000<=4){
+            else if(sumTime/1000<=4){
                 Color toastColor = new Color(255,204,51);
                 bagelShape.setFillColor(toastColor);
                 ratings.setText("I'd slap some cream cheese on that!");
             }
-            else if(toastTime/1000<=6){
+            else if(sumTime/1000<=6){
                 Color toastColor = new Color(153,102,0);
                 bagelShape.setFillColor(toastColor);
                 ratings.setFontSize(CANVAS_HEIGHT*.01);
                 ratings.setText("Wow I wish the line between technology and reality was even more blurred so I can reach in and eat that bagel!");
             }
-            else if(toastTime/1000>=7){
+            else if(sumTime/1000>=7){
                 bagelShape.setFillColor(Color.BLACK);
                 ratings.setText("Dude I wouldn't feed that to my worst enemy.");
             }
