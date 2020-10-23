@@ -55,6 +55,48 @@ public class ToasterSimulation {
     private boolean flag2 = true;
     private Ellipse bagelShape;
     public ToasterSimulation() {
+        graphicToasterInterSections(); 
+
+        this.toastTime = 0;
+        graphicObjectsForToaster(); 
+        textGraphics();
+        createBread();
+        createToaster();
+        createToastControls();
+        addAllToCanvas();
+        overLappingBagel(); 
+        this.bagelShape = bagel.getShape(); 
+        this.bagelHoleShape = bagel.getHoleShape();
+        booleanForAnimations(); 
+        animateBagel1(); 
+        animateLever();
+
+        canvas.animate(() ->
+        {    
+            insertBagelIntoSlit();
+            toastBread();
+        }); 
+    }
+    public void graphicObjectsForToaster(){
+        secretImage = new Image("Design.png");
+        
+        setTimerButton = new Button("Set Time");
+        
+        canvas = new CanvasWindow("TOAST!", CANVAS_WIDTH, CANVAS_HEIGHT);
+    }
+
+
+    public void textGraphics(){
+        timeInputDirections1 = new GraphicsText();
+        timeInputDirections2 = new GraphicsText();
+
+        ratings= new GraphicsText();
+        ratings.setCenter(2, CANVAS_HEIGHT*.2);
+        ratings.setFontSize(CANVAS_HEIGHT*.04);
+        
+        timeInput = new TextField();
+    }
+    public void graphicToasterInterSections(){
         slitBoundary1 = new Rectangle(392, 487, 400, 22);
         slitBoundary1.setStrokeColor(Color.DARK_GRAY);
 
@@ -64,54 +106,19 @@ public class ToasterSimulation {
         lever = new Rectangle(255,700,60,30);
         lever.setFillColor(Color.DARK_GRAY);
 
-        this.toastTime = 0;
-
-        secretImage = new Image("Design.png");
-        
-        setTimerButton = new Button("Set Time");
-        
-        canvas = new CanvasWindow("TOAST!", CANVAS_WIDTH, CANVAS_HEIGHT);
-
-        timeInputDirections1 = new GraphicsText();
-        timeInputDirections2 = new GraphicsText();
-
-        ratings= new GraphicsText();
-        ratings.setCenter(2, CANVAS_HEIGHT*.2);
-        ratings.setFontSize(CANVAS_HEIGHT*.04);
-        
-        timeInput = new TextField();
-
-
-
-        createBread();
-        createToaster();
-        createToastControls();
-
+    }
+    public void booleanForAnimations(){
         isAnimating = true;
+        touchingSlit = false;
+        inSlit = false;
+        isToasting = true;
+    }
+    public void addAllToCanvas(){
         toaster.addToCanvas(canvas);
         canvas.add(slitBoundary1);
         bagel.addToCanvas(canvas);
         bagel.addBagelHoleCanvas(canvas);
-
-        overLappingBagel(); 
-        
         canvas.add(lever); 
-        
-        this.bagelShape = bagel.getShape(); 
-        this.bagelHoleShape = bagel.getHoleShape();
-        touchingSlit = false;
-        inSlit = false;
-        isToasting = true;
-
-        animateBagel1(); 
-        animateLever();
-
-        
-        canvas.animate(() ->
-        {    
-            insertBagelIntoSlit();
-            toastBread();
-        }); 
     }
 
     public void createToastControls(){
