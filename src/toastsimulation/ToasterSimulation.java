@@ -14,22 +14,15 @@ import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.Point;
 import edu.macalester.graphics.Rectangle;
-import edu.macalester.graphics.events.Key;
 import edu.macalester.graphics.ui.Button;
 import edu.macalester.graphics.ui.TextField;
 public class ToasterSimulation {
     private Bagel bagel;
-    private Bagel middleBagel; 
     private Toaster toaster;
     private CanvasWindow canvas;
     private static final int CANVAS_WIDTH = 1200;
     private static final int CANVAS_HEIGHT = 1200;
-    private double x;
-    private double y;
-    private double width = CANVAS_WIDTH;
-    private double height = CANVAS_HEIGHT;
 
-    private GraphicsGroup group;
     private double animationParameter;
     private boolean touchingSlit;
     private boolean inSlit;
@@ -45,8 +38,7 @@ public class ToasterSimulation {
 
     private final double BREAD_RADIUS = 350;  
     private Bagel bagel2;
-    private double centerX; 
-    private double centerY; 
+; 
     private Rectangle slitBoundary1;
     private Rectangle slitBoundary2;
     private boolean isAnimating;
