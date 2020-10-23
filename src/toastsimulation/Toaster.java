@@ -1,12 +1,8 @@
 package toastsimulation;
 
-import java.util.ArrayList;
-
 import edu.macalester.graphics.CanvasWindow;
-import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.Image;
-import edu.macalester.graphics.Rectangle;
-import edu.macalester.graphics.ui.Button;
+
 
 /**
  * This class is Toaster object.
