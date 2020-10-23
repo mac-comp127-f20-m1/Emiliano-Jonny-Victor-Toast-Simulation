@@ -12,6 +12,7 @@ import edu.macalester.graphics.Ellipse;
  */
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsText;
+import edu.macalester.graphics.Image;
 import edu.macalester.graphics.Point;
 import edu.macalester.graphics.Rectangle;
 import edu.macalester.graphics.ui.Button;
@@ -34,6 +35,7 @@ public class ToasterSimulation {
     private Button setTimerButton;
     private Ellipse bagelHoleShape;
     private GraphicsText ratings;
+    private Image secretImage;
 
 
     private final double BREAD_RADIUS = 350;  
@@ -62,6 +64,8 @@ public class ToasterSimulation {
         lever.setFillColor(Color.DARK_GRAY);
 
         this.toastTime = 0;
+
+        secretImage = new Image("Design.png");
         
         setTimerButton = new Button("Set Time");
         
@@ -281,6 +285,20 @@ public class ToasterSimulation {
             else if(toastTime/1000>=7){
                 bagelShape.setFillColor(Color.BLACK);
                 ratings.setText("Dude I wouldn't feed that to my worst enemy.");
+            }
+            else if(toastTime/1000==127){
+                bagelShape.setFillColor(Color.WHITE);
+                ratings.setText("The Paul Cantrell");
+                canvas.pause(1000);
+                
+                isToasting = false;
+                lever.setY(699);
+                bagel.getShape().setY(341);
+                bagelHoleShape.setCenter(bagelShape.getCenter());
+                secretImage.setCenter(bagelShape.getCenter());
+                canvas.add(secretImage);
+                canvas.add(ratings);
+                return;
             }
 
             canvas.pause(toastTime);
