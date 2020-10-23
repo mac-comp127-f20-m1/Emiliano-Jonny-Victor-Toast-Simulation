@@ -265,7 +265,7 @@ public class ToasterSimulation {
     }
 
     public void toastBread(){
-        if(isLeverDownWithBread() && isToasting){
+        if(isLeverDownWithBread() && isToasting && toastTime/1000 != 127){
             if(toastTime/1000<=2){
                 Color toastColor = new Color(245,222,179);
                 bagelShape.setFillColor(toastColor);
@@ -286,7 +286,14 @@ public class ToasterSimulation {
                 bagelShape.setFillColor(Color.BLACK);
                 ratings.setText("Dude I wouldn't feed that to my worst enemy.");
             }
-            else if(toastTime/1000==127){
+            canvas.pause(toastTime);
+            isToasting = false;
+            lever.setY(699);
+            bagel.getShape().setY(341);
+            bagelHoleShape.setCenter(bagelShape.getCenter());
+            canvas.add(ratings);
+
+        } else if (isLeverDownWithBread() && isToasting && toastTime/1000==127){
                 bagelShape.setFillColor(Color.WHITE);
                 ratings.setText("The Paul Cantrell");
                 canvas.pause(1000);
@@ -296,18 +303,13 @@ public class ToasterSimulation {
                 bagel.getShape().setY(341);
                 bagelHoleShape.setCenter(bagelShape.getCenter());
                 secretImage.setCenter(bagelShape.getCenter());
+                secretImage.setY(bagelShape.getY()-10);
                 canvas.add(secretImage);
                 canvas.add(ratings);
-                return;
-            }
-
-            canvas.pause(toastTime);
-            isToasting = false;
-            lever.setY(699);
-            bagel.getShape().setY(341);
-            bagelHoleShape.setCenter(bagelShape.getCenter());
-            canvas.add(ratings);
         }
+
+            
+        
     }
 
     public boolean isBreadObject(Point point){
