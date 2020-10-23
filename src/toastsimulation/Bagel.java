@@ -40,7 +40,8 @@ public class Bagel {
     }
 
     public void addBagelHoleCanvas(CanvasWindow canvas) {
-        bagelHole.setFilled(false);
+        bagelHole.setFillColor(Color.white);
+        bagelHole.setStrokeColor(Color.white);
         canvas.add(bagelHole);
     }
 
