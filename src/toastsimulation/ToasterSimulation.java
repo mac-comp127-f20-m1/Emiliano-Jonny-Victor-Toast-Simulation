@@ -296,21 +296,21 @@ public class ToasterSimulation {
             isToasting = true;
 
         } else if (isLeverDownWithBread() && isToasting && toastTime/1000==127){
-                bagelShape.setFillColor(Color.WHITE);
-                ratings.setText("The Paul Cantrell");
-                canvas.pause(1000);
-                
-                isToasting = false;
-                lever.setY(699);
-                bagel.getShape().setY(341);
-                bagelHoleShape.setCenter(bagelShape.getCenter());
-                secretImage.setCenter(bagelShape.getCenter());
-                secretImage.setY(bagelShape.getY()-10);
-                canvas.add(secretImage);
-                canvas.add(ratings);
-                inSlit = false;
-                touchingSlit = false;
-                isToasting = true;
+            bagelShape.setFillColor(Color.WHITE);
+            ratings.setText("The Paul Cantrell");
+            canvas.pause(1000);
+            
+            isToasting = false;
+            lever.setY(699);
+            bagel.getShape().setY(341);
+            bagelHoleShape.setCenter(bagelShape.getCenter());
+            secretImage.setCenter(bagelShape.getCenter());
+            secretImage.setY(bagelShape.getY()-10);
+            canvas.add(secretImage);
+            canvas.add(ratings);
+            inSlit = false;
+            touchingSlit = false;
+            isToasting = true;
         }
 
             
