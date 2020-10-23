@@ -19,6 +19,8 @@ public class Bagel {
     public static final Color breadColor = new Color(255,255,153);
 
     //fuck you github
+
+    /**We decided to use a bagel for our choice of hardened carbohydrate because... Yum */
     public Bagel(
         double centerX,
         double centerY
@@ -39,6 +41,7 @@ public class Bagel {
        
     }
 
+    /**Our Bagel 'hole' is a separate ellipse that with follows the center position of the larger ellipse to give the illusion of a bagel shape */
     public void addBagelHoleCanvas(CanvasWindow canvas) {
         bagelHole.setFillColor(Color.white);
         bagelHole.setStrokeColor(Color.white);

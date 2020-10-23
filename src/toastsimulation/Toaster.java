@@ -19,7 +19,7 @@ public class Toaster{
     private Image toasterMidBody;
     private Image toasterBottomBody;
 
-    
+    /**Our toaster is divided into 3 separate images that are stitched together, this allows us to create the illusion that the bagel is being inserted into the toaster */
     public Toaster(CanvasWindow canvas){
         this.toasterTopBody = new Image(300, 450, "toasterTopBody.png");
         this.toasterMidBody = new Image(300, 496, "toasterMidBody.png");

@@ -17,8 +17,12 @@ import edu.macalester.graphics.Point;
 import edu.macalester.graphics.Rectangle;
 import edu.macalester.graphics.ui.Button;
 import edu.macalester.graphics.ui.TextField;
-
+/** This program creates a toaster simulation that toasts a bagel based of of a specified input for time given by the user.
+ *  The program utilizes animate methods, canvas events, mouse events, boolean variables, lambda expressions and other java
+ *  tools to create an effective and easy to use computer program.
+ */
 public class ToasterSimulation {
+    /**Implements the bagel class into ToasterSimulation */
     private Bagel bagel;
     private Ellipse bagelShape;
     private Ellipse bagelHoleShape;
@@ -28,23 +32,25 @@ public class ToasterSimulation {
     private Toaster toaster;
     private boolean isToasting;
 
+    /**Creates canvas */
     private CanvasWindow canvas;
     private static final int CANVAS_WIDTH = 1200;
     private static final int CANVAS_HEIGHT = 1200;
 
     private double animationParameter;
-    // slits for monitoring if bagel enter toaster
+
+    /** slits for monitoring if bagel enter toaster */
     private boolean touchingSlit;
     private boolean inSlit;
     private Rectangle slitBoundary1;
-    // textfield boxes / images for canvas
+    /**textfield boxes / images for canvas*/
     private TextField timeInput;
     private GraphicsText timeInputDirections1;
     private GraphicsText timeInputDirections2;
     private GraphicsText ratings;
     private Image secretImage;
 
-    // monitoring time inside toaster
+    /** monitoring time inside toaster*/
     private int sumTime;
     private Integer toastTime;
     private Button setTimerButton;
@@ -58,7 +64,8 @@ public class ToasterSimulation {
     private boolean flag1 = true;
     private boolean flag2 = true;
 
-
+    /**Toaster simulation runs on a series of methods that create objects on the canvas, use boolean expressions to set certain events into action, and lambda expressions 
+     * to manage animations */
     public ToasterSimulation() {
         graphicToasterInterSections();
 
@@ -80,6 +87,7 @@ public class ToasterSimulation {
 
     }
 
+    /**The animateToaster method sets the animations that pertain to the toaster, taking the bread and toasting, into action */
     public void animateToaster() {
         canvas.animate(() -> {
             insertBagelIntoSlit();
@@ -87,6 +95,7 @@ public class ToasterSimulation {
         });
     }
 
+    /**Creates the visuals that appear on the UI for the toaster */
     public void graphicObjectsForToaster() {
         secretImage = new Image("Design.png");
 
@@ -94,7 +103,7 @@ public class ToasterSimulation {
 
         canvas = new CanvasWindow("TOAST!", CANVAS_WIDTH, CANVAS_HEIGHT);
     }
-
+    /**Creates the commentary that shows up on the canvvas after a bagel has been toasted and adds the direction to the canvas */
     public void textGraphics() {
         timeInputDirections1 = new GraphicsText();
         timeInputDirections2 = new GraphicsText();
@@ -106,6 +115,9 @@ public class ToasterSimulation {
         timeInput = new TextField();
     }
 
+    /**Sets the bounds on the canvas that indicate where the bread insertions on the totoaster are located,
+     * also speciies a location and other componesnts for the lever
+     */
     public void graphicToasterInterSections() {
         slitBoundary1 = new Rectangle(CANVAS_WIDTH * 0.326, CANVAS_HEIGHT * 0.4058, CANVAS_WIDTH * 0.333334,
             CANVAS_HEIGHT * 0.0183);
@@ -116,7 +128,9 @@ public class ToasterSimulation {
         lever.setFillColor(Color.DARK_GRAY);
 
     }
-
+    /**These are the states that in which these booleans should be in when an animation is occuring, these boolean values are
+     * cruicial when it comes to how our objects interact with one another when a bagel is occuring or a object is moving around the canvas
+     */
     public void booleanForAnimations() {
         isAnimating = true;
         touchingSlit = false;
@@ -124,6 +138,7 @@ public class ToasterSimulation {
         isToasting = true;
     }
 
+    /**Adds the objects that are visible to the user to the canvas */
     public void addAllToCanvas() {
         toaster.addToCanvas(canvas);
         canvas.add(slitBoundary1);
@@ -132,6 +147,7 @@ public class ToasterSimulation {
         canvas.add(lever);
     }
 
+    /**Specifies components and specifics for objects, buttons, and canvas objects that pertain the toasters controls */
     public void createToastControls() {
         setTimerButton.setPosition(CANVAS_WIDTH * .5, CANVAS_HEIGHT * .62);
         timeInput.setPosition(CANVAS_WIDTH * .5, CANVAS_HEIGHT * .6);
@@ -156,6 +172,7 @@ public class ToasterSimulation {
     // }
     // }
 
+    /**Allows for the way the toaster is presented on the canvas to remain consistent and look realistic when the bagel is inserted */
     public void overLappingBagel() {
         toaster.removeMiddleBody();
         toaster.addMiddleBody();
@@ -163,6 +180,7 @@ public class ToasterSimulation {
         toaster.addBottomBody();
     }
 
+    /**Method handles the state of specific boolean objects when the insetBagelIntoSlit is called, specifies the position for the bagel 'inside' the toaster */
     public void insertBagelIntoSlit() {
         checkIfBagelIsOverSlit();
         canvas.onMouseUp(event -> {
@@ -177,19 +195,21 @@ public class ToasterSimulation {
         });
     }
 
+    /**Method checks multiple positional components of the bagel, if the bagels position falls within the specifications of the if statement it sets the 'touchingSlit' method
+     * to true which is used later in the program to set other methods into action if it is equal to trues
+      */
     public void checkIfBagelIsOverSlit() {
         if (bagel.getShape().getX() > CANVAS_WIDTH * 0.3266 &&
             bagel.getShape().getX() + bagel.getRadius() < CANVAS_WIDTH * 0.66 &&
             canvas.getElementAt(bagel.getShape().getX() + bagel.getRadius(),
-                bagel.getShape().getY() + (2 * bagel.getRadius())) instanceof Rectangle) {
-
-            touchingSlit = true;
-            canvas.pause(300);
+            bagel.getShape().getY() + (2 * bagel.getRadius())) instanceof Rectangle) {
+                touchingSlit = true;
+                canvas.pause(300);
         }
 
     }
-
-
+    //Check me on accuracy
+    /**Allows the user to drag the bagel at certain positions on the canvas */
     public void animateBagel1() {
         canvas.onDrag(
             event -> {
@@ -212,20 +232,22 @@ public class ToasterSimulation {
                 }
             });
     }
+    /**A method that would have been implemented if we created a second bagel */
+    // public void animateBagel2() {
+    //     Ellipse bagelShape2 = bagel2.getShape();
+    //     canvas.onDrag(
+    //         event -> bagelShape2.setPosition(
+    //             bagelShape2.getX() + event.getDelta().getX(),
+    //             bagelShape2.getY() + event.getDelta().getY()));
+    //     animateMethod();
+    // }
 
-    public void animateBagel2() {
-        Ellipse bagelShape2 = bagel2.getShape();
-        canvas.onDrag(
-            event -> bagelShape2.setPosition(
-                bagelShape2.getX() + event.getDelta().getX(),
-                bagelShape2.getY() + event.getDelta().getY()));
-        animateMethod();
-    }
-
+    //Check me on accuracy
     public double getAnimationParameter() {
         return animationParameter;
     }
 
+    //Check me on accuracy
     public void animateMethod() {
         if (flag1 == false) {
             canvas.onMouseDown(event -> flag1 = false);
@@ -234,6 +256,7 @@ public class ToasterSimulation {
         }
     }
 
+    //Check me on accuracy
     public void animateMethod2() {
         if (flag2 == false) {
             canvas.onMouseDown(event -> flag2 = false);
@@ -242,6 +265,7 @@ public class ToasterSimulation {
         }
     }
 
+    /**Allows the user to drag the lever under certain conditions */
     public void animateLever() {
         canvas.onDrag(
             event -> {
@@ -274,7 +298,7 @@ public class ToasterSimulation {
             });
         animateMethod();
     }
-
+    /**Boolean variable that checks if the lever is in 'down' position with the bread inaserted, this ultimately is used to set the toastBread into action */
     public boolean isLeverDownWithBread() {
         if (inSlit && lever.getY() >= CANVAS_HEIGHT * 0.716667) {
             return true;
@@ -283,6 +307,7 @@ public class ToasterSimulation {
         }
     }
 
+    /**Specifies what happens when the toaster magically accepts the bread and returns the mysteriously beter tasting hard form of it */
     public void toastBread() {
         if (isLeverDownWithBread() && isToasting && toastTime / 1000 != 127) {
             if (sumTime / 1000 <= 2) {
@@ -332,6 +357,7 @@ public class ToasterSimulation {
         }
     }
 
+    /**Checks if the object that is clicked is a bread object, used to implemet its drag event */
     public boolean isBreadObject(Point point) {
         if (canvas.getElementAt(point) instanceof Ellipse) {
             return true;
@@ -340,6 +366,7 @@ public class ToasterSimulation {
         }
     }
 
+    /**Checks if the object that is clicked is a lever object, used to implemet its drag event */
     public boolean isLeverObject(Point point) {
         if (canvas.getElementAt(point) instanceof Rectangle) {
             return true;
@@ -348,18 +375,18 @@ public class ToasterSimulation {
         }
     }
 
+    // Check me on accuracy
     public void setAnimationParameter(double animationParameter) {
         this.animationParameter = animationParameter;
     }
 
+    /**Main method that is used to run the toaster simulation program */
     public static void main(String[] args) {
         ToasterSimulation simulation = new ToasterSimulation();
     }
 
     public void createBread() {
         bagel = new Bagel(CANVAS_WIDTH * 0.2525, CANVAS_HEIGHT * 0.2525);
-
-
     }
 
     public void createToaster() {
