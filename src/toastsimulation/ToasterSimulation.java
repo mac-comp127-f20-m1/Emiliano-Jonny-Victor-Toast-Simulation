@@ -113,7 +113,8 @@ public class ToasterSimulation {
 
         errorMessage = new GraphicsText("Please enter a integer greater than 0!");
         errorMessage.setFontSize(CANVAS_HEIGHT * .02);
-        errorMessage.setPosition(CANVAS_WIDTH * .5, CANVAS_HEIGHT * .3);
+        errorMessage.setPosition(CANVAS_WIDTH * .3, CANVAS_HEIGHT * .2);
+        errorMessage.setFillColor(Color.RED);
     }
 
     /**Sets the bounds on the canvas that indicate where the bread insertions on the totoaster are located,
@@ -162,14 +163,13 @@ public class ToasterSimulation {
         canvas.add(timeInputDirections1);
         canvas.add(timeInputDirections2);
         setTimerButton.onClick(() -> {
-            System.out.println(timeInput.getText());
             if(timeInput.getText().matches(".*[a-z].*") || Integer.parseInt(timeInput.getText()) <= 0) {
-                System.out.println("error");
                 canvas.add(errorMessage);
+                canvas.draw();
                 canvas.pause(1000);
                 canvas.remove(errorMessage);
+                canvas.draw();
             } else {
-                System.out.println("this works");
                 toastTime = 1000 * Integer.parseInt(timeInput.getText());
                 sumTime += toastTime;
             }
