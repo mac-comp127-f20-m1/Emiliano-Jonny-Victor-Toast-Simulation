@@ -143,6 +143,7 @@ public class ToasterSimulation {
         touchingSlit = false;
         inSlit = false;
         isToasting = true;
+        isPaul = false;
     }
 
     /**Adds the objects that are visible to the user to the canvas */
@@ -242,7 +243,7 @@ public class ToasterSimulation {
                         bagelHoleShape.setCenter(bagelShape.getCenter());
                         if(isPaul){
                             secretImage.setCenter(bagelShape.getCenter());
-                            secretImage.setY(bagelShape.getY() - 10);
+                            secretImage.setY(bagelShape.getY() + 12);
                         }
 
                     } else {
@@ -253,7 +254,7 @@ public class ToasterSimulation {
                         bagelHoleShape.setCenter(bagelShape.getCenter());
                         if(isPaul){
                             secretImage.setCenter(bagelShape.getCenter());
-                            secretImage.setY(bagelShape.getY() - 10);
+                            secretImage.setY(bagelShape.getY() + 12);
                         }
                     }
                 }
@@ -333,10 +334,10 @@ public class ToasterSimulation {
             bagel.getShape().setY(CANVAS_HEIGHT * 0.2841);
             bagelHoleShape.setCenter(bagelShape.getCenter());
             canvas.add(ratings);
-            isPaul = true;
+            isToasting = true;
             inSlit = false;
             touchingSlit = false;
-            isPaul = false;
+            
 
         } else if (isLeverDownWithBread() && isToasting && toastTime / 1000 == 127) {
             bagelShape.setFillColor(Color.WHITE);
@@ -348,7 +349,7 @@ public class ToasterSimulation {
             bagel.getShape().setY(CANVAS_HEIGHT * 0.2841);
             bagelHoleShape.setCenter(bagelShape.getCenter());
             secretImage.setCenter(bagelShape.getCenter());
-            secretImage.setY(bagelShape.getY() - 10);
+            secretImage.setY(bagelShape.getY() + 12);
             canvas.add(secretImage);
             canvas.add(ratings);
             inSlit = false;
