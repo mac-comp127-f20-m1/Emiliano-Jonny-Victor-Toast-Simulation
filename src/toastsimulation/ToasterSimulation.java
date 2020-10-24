@@ -8,22 +8,24 @@ import edu.macalester.graphics.Ellipse;
 /**
  * This class is the main toaster simulation.
  *
- * By Emiliano, Victor and Jonny
+ * By Groovy Emiliano, Victor and Jonny
  */
-import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.Image;
 import edu.macalester.graphics.Point;
 import edu.macalester.graphics.Rectangle;
 import edu.macalester.graphics.ui.Button;
 import edu.macalester.graphics.ui.TextField;
+
 /** This program creates a toaster simulation that toasts a bagel based of of a specified input for time given by the user.
  *  The program utilizes animate methods, canvas events, mouse events, boolean variables, lambda expressions and other java
  *  tools to create an effective and easy to use computer program.
+ * 
+ * used https://stackoverflow.com/questions/24086968/tell-if-string-contains-a-z-chars for reference
  */
 public class ToasterSimulation {
 
-    /**Implements the bagel class into ToasterSimulation */
+    // Implements the bagel class into ToasterSimulation
     private Bagel bagel;
     private Ellipse bagelShape;
     private Ellipse bagelHoleShape;
@@ -32,41 +34,39 @@ public class ToasterSimulation {
 
     private Toaster toaster;
     private boolean isToasting;
+    private boolean isPaul;
 
-    /**Creates canvas */
+    // Creates canvas
     private CanvasWindow canvas;
     private static final int CANVAS_WIDTH = 1200;
     private static final int CANVAS_HEIGHT = 1200;
 
 
-    /** slits for monitoring if bagel enter toaster */
+    // slits for monitoring if bagel enter toaster 
     private boolean touchingSlit;
     private boolean inSlit;
     private Rectangle slitBoundary1;
-    /**textfield boxes / images for canvas*/
+    //textfield boxes / images for canvas
     private TextField timeInput;
+    private GraphicsText errorMessage;
     private GraphicsText timeInputDirections1;
     private GraphicsText timeInputDirections2;
     private GraphicsText ratings;
     private Image secretImage;
-    private Image background;
 
-    /** monitoring time inside toaster*/
+    //  monitoring time inside toaster
     private int sumTime;
     private Integer toastTime;
     private Button setTimerButton;
 
-    private boolean isAnimating;
-    private boolean isDragable;
+    
 
     private Rectangle lever;
 
-    //Frankly I have no idea wtf these do
-    private boolean flag1 = true;
-    private boolean flag2 = true;
-
-    /**Toaster simulation runs on a series of methods that create objects on the canvas, use boolean expressions to set certain events into action, and lambda expressions 
-     * to manage animations */
+    /**Toaster simulation runs on a series of methods that create objects on the canvas, 
+     * use boolean expressions to set certain events into action, and lambda expressions 
+     * to manage animations 
+     */
     public ToasterSimulation() {
         graphicToasterInterSections();
 
@@ -114,6 +114,11 @@ public class ToasterSimulation {
         ratings.setFontSize(CANVAS_HEIGHT * .04);
 
         timeInput = new TextField();
+
+        errorMessage = new GraphicsText("Please enter a integer greater than 0!");
+        errorMessage.setFontSize(CANVAS_HEIGHT * .02);
+        errorMessage.setPosition(CANVAS_WIDTH * .3, CANVAS_HEIGHT * .2);
+        errorMessage.setFillColor(Color.RED);
     }
 
     /**Sets the bounds on the canvas that indicate where the bread insertions on the totoaster are located,
@@ -129,11 +134,12 @@ public class ToasterSimulation {
         lever.setFillColor(Color.DARK_GRAY);
 
     }
-    /**These are the states that in which these booleans should be in when an animation is occuring, these boolean values are
-     * cruicial when it comes to how our objects interact with one another when a bagel is occuring or a object is moving around the canvas
+    /**These are the states that in which these booleans should be in when an animation is occuring,
+     * these boolean values are
+     * cruicial when it comes to how our objects interact with one another when a bagel 
+     * is occuring or a object is moving around the canvas
      */
     public void booleanForAnimations() {
-        isAnimating = true;
         touchingSlit = false;
         inSlit = false;
         isToasting = true;
@@ -163,17 +169,21 @@ public class ToasterSimulation {
         canvas.add(timeInputDirections1);
         canvas.add(timeInputDirections2);
         setTimerButton.onClick(() -> {
-            toastTime = 1000 * Integer.parseInt(timeInput.getText());
-            sumTime += toastTime;
+            if(timeInput.getText().matches(".*[a-z].*") || Integer.parseInt(timeInput.getText()) <= 0) {
+                canvas.add(errorMessage);
+                canvas.draw();
+                canvas.pause(2000);
+                canvas.remove(errorMessage);
+                canvas.draw();
+            } else {
+                toastTime = 1000 * Integer.parseInt(timeInput.getText());
+                sumTime += toastTime;
+            }
+            
         });
 
 
     }
-    // public void breadEnteredAgain(){
-    // if(){
-
-    // }
-    // }
 
     /**Allows for the way the toaster is presented on the canvas to remain consistent and look realistic when the bagel is inserted */
     public void overLappingBagel() {
@@ -183,7 +193,9 @@ public class ToasterSimulation {
         toaster.addBottomBody();
     }
 
-    /**Method handles the state of specific boolean objects when the insetBagelIntoSlit is called, specifies the position for the bagel 'inside' the toaster */
+    /**Method handles the state of specific boolean objects when the insetBagelIntoSlit is called, 
+     * specifies the position for the bagel 'inside' the toaster 
+     */
     public void insertBagelIntoSlit() {
         checkIfBagelIsOverSlit();
         canvas.onMouseUp(event -> {
@@ -192,13 +204,18 @@ public class ToasterSimulation {
                 bagelHoleShape.setCenter(bagelShape.getCenter());
                 inSlit = true;
                 touchingSlit = false;
+                if(isPaul){
+                    canvas.remove(secretImage);
+                    isPaul = false;
+                }
             } else {
                 return;
             }
         });
     }
 
-    /**Method checks multiple positional components of the bagel, if the bagels position falls within the specifications of the if statement it sets the 'touchingSlit' method
+    /**Method checks multiple positional components of the bagel,
+     *  if the bagels position falls within the specifications of the if statement it sets the 'touchingSlit' method
      * to true which is used later in the program to set other methods into action if it is equal to trues
       */
     public void checkIfBagelIsOverSlit() {
@@ -212,7 +229,7 @@ public class ToasterSimulation {
 
     }
     //Check me on accuracy
-    /**Allows the user to drag the bagel at certain positions on the canvas */
+    /**Allows the user to drag the bagel at certain positions on the canvas and makes sure that the user deosn't drag past a certain point and break the simulation by sliding sideways*/
     public void animateBagel1() {
         canvas.onDrag(
             event -> {
@@ -223,36 +240,27 @@ public class ToasterSimulation {
                             bagelShape.getY() - 3);
 
                         bagelHoleShape.setCenter(bagelShape.getCenter());
-                        animateMethod();
+                        if(isPaul){
+                            secretImage.setCenter(bagelShape.getCenter());
+                            secretImage.setY(bagelShape.getY() - 10);
+                        }
+
                     } else {
                         bagelShape.setPosition(
                             bagelShape.getX() + event.getDelta().getX(),
                             bagelShape.getY() + event.getDelta().getY());
 
                         bagelHoleShape.setCenter(bagelShape.getCenter());
-                        animateMethod();
+                        if(isPaul){
+                            secretImage.setCenter(bagelShape.getCenter());
+                            secretImage.setY(bagelShape.getY() - 10);
+                        }
                     }
                 }
             });
     }
 
-    //Check me on accuracy
-    public void animateMethod() {
-        if (flag1 == false) {
-            canvas.onMouseDown(event -> flag1 = false);
-        } else {
-            canvas.onMouseUp(event -> flag1 = true);
-        }
-    }
 
-    //Check me on accuracy
-    public void animateMethod2() {
-        if (flag2 == false) {
-            canvas.onMouseDown(event -> flag2 = false);
-        } else {
-            canvas.onMouseUp(event -> flag2 = true);
-        }
-    }
 
     /**Allows the user to drag the lever under certain conditions */
     public void animateLever() {
@@ -267,7 +275,7 @@ public class ToasterSimulation {
                         bagelShape.getX(),
                         bagelShape.getY() + change);
                     bagelHoleShape.setCenter(bagelShape.getCenter());
-                    animateMethod();
+
                     if (lever.getY() <= CANVAS_HEIGHT * 0.5825) {
                         lever.setY(CANVAS_HEIGHT * 0.5825);
                     } else if (lever.getY() >= CANVAS_HEIGHT * 0.716667) {
@@ -277,7 +285,7 @@ public class ToasterSimulation {
                     lever.setPosition(
                         lever.getX(),
                         lever.getY() + event.getDelta().getY());
-                    animateMethod();
+
                     if (lever.getY() <= CANVAS_HEIGHT * 0.5825) {
                         lever.setY(CANVAS_HEIGHT * 0.5825);
                     } else if (lever.getY() >= CANVAS_HEIGHT * 0.716667) {
@@ -285,9 +293,11 @@ public class ToasterSimulation {
                     }
                 }
             });
-        animateMethod();
+
     }
-    /**Boolean variable that checks if the lever is in 'down' position with the bread inaserted, this ultimately is used to set the toastBread into action */
+    /**Boolean variable that checks if the lever is in 'down' position with the bread inaserted, 
+     * this ultimately is used to set the toastBread into action 
+     */
     public boolean isLeverDownWithBread() {
         if (inSlit && lever.getY() >= CANVAS_HEIGHT * 0.716667) {
             return true;
@@ -310,7 +320,7 @@ public class ToasterSimulation {
             } else if (sumTime / 1000 <= 6) {
                 Color toastColor = new Color(153, 102, 0);
                 bagelShape.setFillColor(toastColor);
-                ratings.setFontSize(CANVAS_HEIGHT * .01);
+                ratings.setFontSize(CANVAS_HEIGHT * .02);
                 ratings.setText(
                     "Wow I wish the line between technology and reality was even more blurred so I can reach in and eat that bagel!");
             } else if (sumTime / 1000 >= 7) {
@@ -323,9 +333,10 @@ public class ToasterSimulation {
             bagel.getShape().setY(CANVAS_HEIGHT * 0.2841);
             bagelHoleShape.setCenter(bagelShape.getCenter());
             canvas.add(ratings);
+            isPaul = true;
             inSlit = false;
             touchingSlit = false;
-            isToasting = true;
+            isPaul = false;
 
         } else if (isLeverDownWithBread() && isToasting && toastTime / 1000 == 127) {
             bagelShape.setFillColor(Color.WHITE);
@@ -343,6 +354,7 @@ public class ToasterSimulation {
             inSlit = false;
             touchingSlit = false;
             isToasting = true;
+            isPaul = true;
         }
     }
 
