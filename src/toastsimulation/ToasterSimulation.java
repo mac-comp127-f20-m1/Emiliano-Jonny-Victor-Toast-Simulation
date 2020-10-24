@@ -25,7 +25,7 @@ import edu.macalester.graphics.ui.TextField;
  */
 public class ToasterSimulation {
 
-    /**Implements the bagel class into ToasterSimulation */
+    // Implements the bagel class into ToasterSimulation
     private Bagel bagel;
     private Ellipse bagelShape;
     private Ellipse bagelHoleShape;
@@ -36,13 +36,13 @@ public class ToasterSimulation {
     private boolean isToasting;
     private boolean isPaul;
 
-    /**Creates canvas */
+    // Creates canvas
     private CanvasWindow canvas;
     private static final int CANVAS_WIDTH = 1200;
     private static final int CANVAS_HEIGHT = 1200;
 
 
-    /** slits for monitoring if bagel enter toaster */
+    // slits for monitoring if bagel enter toaster 
     private boolean touchingSlit;
     private boolean inSlit;
     private Rectangle slitBoundary1;
@@ -54,7 +54,7 @@ public class ToasterSimulation {
     private GraphicsText ratings;
     private Image secretImage;
 
-    /** monitoring time inside toaster*/
+    //  monitoring time inside toaster
     private int sumTime;
     private Integer toastTime;
     private Button setTimerButton;
@@ -63,8 +63,10 @@ public class ToasterSimulation {
 
     private Rectangle lever;
 
-    /**Toaster simulation runs on a series of methods that create objects on the canvas, use boolean expressions to set certain events into action, and lambda expressions 
-     * to manage animations */
+    /**Toaster simulation runs on a series of methods that create objects on the canvas, 
+     * use boolean expressions to set certain events into action, and lambda expressions 
+     * to manage animations 
+     */
     public ToasterSimulation() {
         graphicToasterInterSections();
 
@@ -132,8 +134,10 @@ public class ToasterSimulation {
         lever.setFillColor(Color.DARK_GRAY);
 
     }
-    /**These are the states that in which these booleans should be in when an animation is occuring, these boolean values are
-     * cruicial when it comes to how our objects interact with one another when a bagel is occuring or a object is moving around the canvas
+    /**These are the states that in which these booleans should be in when an animation is occuring,
+     * these boolean values are
+     * cruicial when it comes to how our objects interact with one another when a bagel 
+     * is occuring or a object is moving around the canvas
      */
     public void booleanForAnimations() {
         touchingSlit = false;
@@ -189,7 +193,9 @@ public class ToasterSimulation {
         toaster.addBottomBody();
     }
 
-    /**Method handles the state of specific boolean objects when the insetBagelIntoSlit is called, specifies the position for the bagel 'inside' the toaster */
+    /**Method handles the state of specific boolean objects when the insetBagelIntoSlit is called, 
+     * specifies the position for the bagel 'inside' the toaster 
+     */
     public void insertBagelIntoSlit() {
         checkIfBagelIsOverSlit();
         canvas.onMouseUp(event -> {
@@ -208,7 +214,8 @@ public class ToasterSimulation {
         });
     }
 
-    /**Method checks multiple positional components of the bagel, if the bagels position falls within the specifications of the if statement it sets the 'touchingSlit' method
+    /**Method checks multiple positional components of the bagel,
+     *  if the bagels position falls within the specifications of the if statement it sets the 'touchingSlit' method
      * to true which is used later in the program to set other methods into action if it is equal to trues
       */
     public void checkIfBagelIsOverSlit() {
@@ -222,7 +229,7 @@ public class ToasterSimulation {
 
     }
     //Check me on accuracy
-    /**Allows the user to drag the bagel at certain positions on the canvas and makes sure that the user drag past a certain point and break the simulation by sliding sideways*/
+    /**Allows the user to drag the bagel at certain positions on the canvas and makes sure that the user deosn't drag past a certain point and break the simulation by sliding sideways*/
     public void animateBagel1() {
         canvas.onDrag(
             event -> {
@@ -288,7 +295,9 @@ public class ToasterSimulation {
             });
 
     }
-    /**Boolean variable that checks if the lever is in 'down' position with the bread inaserted, this ultimately is used to set the toastBread into action */
+    /**Boolean variable that checks if the lever is in 'down' position with the bread inaserted, 
+     * this ultimately is used to set the toastBread into action 
+     */
     public boolean isLeverDownWithBread() {
         if (inSlit && lever.getY() >= CANVAS_HEIGHT * 0.716667) {
             return true;
