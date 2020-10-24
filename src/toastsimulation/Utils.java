@@ -7,6 +7,7 @@ package toastsimulation;
  */
 
 public class Utils {
+    
     public static Integer stringToMillliseconds(String inputText){
         return 1000 * Integer.parseInt(inputText);
     }

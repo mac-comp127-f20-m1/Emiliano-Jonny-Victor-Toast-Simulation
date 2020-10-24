@@ -16,6 +16,7 @@ import edu.macalester.graphics.Point;
 import edu.macalester.graphics.Rectangle;
 import edu.macalester.graphics.ui.Button;
 import edu.macalester.graphics.ui.TextField;
+
 /** This program creates a toaster simulation that toasts a bagel based of of a specified input for time given by the user.
  *  The program utilizes animate methods, canvas events, mouse events, boolean variables, lambda expressions and other java
  *  tools to create an effective and easy to use computer program.
@@ -33,6 +34,7 @@ public class ToasterSimulation {
 
     private Toaster toaster;
     private boolean isToasting;
+    private boolean isPaul;
 
     /**Creates canvas */
     private CanvasWindow canvas;
@@ -166,7 +168,7 @@ public class ToasterSimulation {
             if(timeInput.getText().matches(".*[a-z].*") || Integer.parseInt(timeInput.getText()) <= 0) {
                 canvas.add(errorMessage);
                 canvas.draw();
-                canvas.pause(1000);
+                canvas.pause(2000);
                 canvas.remove(errorMessage);
                 canvas.draw();
             } else {
@@ -196,6 +198,10 @@ public class ToasterSimulation {
                 bagelHoleShape.setCenter(bagelShape.getCenter());
                 inSlit = true;
                 touchingSlit = false;
+                if(isPaul){
+                    canvas.remove(secretImage);
+                    isPaul = false;
+                }
             } else {
                 return;
             }
@@ -216,7 +222,7 @@ public class ToasterSimulation {
 
     }
     //Check me on accuracy
-    /**Allows the user to drag the bagel at certain positions on the canvas */
+    /**Allows the user to drag the bagel at certain positions on the canvas and makes sure that the user drag past a certain point and break the simulation by sliding sideways*/
     public void animateBagel1() {
         canvas.onDrag(
             event -> {
@@ -227,6 +233,10 @@ public class ToasterSimulation {
                             bagelShape.getY() - 3);
 
                         bagelHoleShape.setCenter(bagelShape.getCenter());
+                        if(isPaul){
+                            secretImage.setCenter(bagelShape.getCenter());
+                            secretImage.setY(bagelShape.getY() - 10);
+                        }
 
                     } else {
                         bagelShape.setPosition(
@@ -234,7 +244,10 @@ public class ToasterSimulation {
                             bagelShape.getY() + event.getDelta().getY());
 
                         bagelHoleShape.setCenter(bagelShape.getCenter());
-
+                        if(isPaul){
+                            secretImage.setCenter(bagelShape.getCenter());
+                            secretImage.setY(bagelShape.getY() - 10);
+                        }
                     }
                 }
             });
@@ -311,9 +324,10 @@ public class ToasterSimulation {
             bagel.getShape().setY(CANVAS_HEIGHT * 0.2841);
             bagelHoleShape.setCenter(bagelShape.getCenter());
             canvas.add(ratings);
+            isPaul = true;
             inSlit = false;
             touchingSlit = false;
-            isToasting = true;
+            isPaul = false;
 
         } else if (isLeverDownWithBread() && isToasting && toastTime / 1000 == 127) {
             bagelShape.setFillColor(Color.WHITE);
@@ -331,6 +345,7 @@ public class ToasterSimulation {
             inSlit = false;
             touchingSlit = false;
             isToasting = true;
+            isPaul = true;
         }
     }
 
